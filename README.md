@@ -1,6 +1,6 @@
 # jsonvl
 
-JSON validator.
+JSON validation for Python.
 
 ## Installation
 
