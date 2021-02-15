@@ -3,7 +3,7 @@ from jsonvl.constants.reserved import Reserved
 from jsonvl.exceptions.errors import ValidationError
 
 
-def validate_array(data, schema, validator):
+def validate_array(data, schema, validator, path):
     """
     Validate a JSON array based on a schema.
 
@@ -17,5 +17,6 @@ def validate_array(data, schema, validator):
         raise ValidationError("Array types must define the element type with the \"elem\" field")
 
     elem_schema = schema[Reserved.ELEMENT]
-    for elem in data:
-        validator.validate(elem, elem_schema)
+    for i, elem in enumerate(data):
+        new_path = f'{path}[{i}]'
+        validator._validate(elem, elem_schema, new_path)

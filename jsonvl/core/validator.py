@@ -22,28 +22,31 @@ class Validator:
         :param data: JSON data as a Python object.
         :param schema: JSON schema as a Python object.
         """
+        self._validate(data, schema, path='json')
+
+    def _validate(self, data, schema, path):
         if isinstance(schema, str):
             if not Primitive.has(schema) and not Collection.has(schema):
                 raise ValidationError(f"Type {schema} is not a valid type")
 
             if schema == Primitive.STRING.value:
-                validate_string(data, schema)
+                validate_string(data, schema, path)
             elif schema == Primitive.NUMBER.value:
-                validate_number(data, schema)
+                validate_number(data, schema, path)
         elif isinstance(schema, dict):
             if Reserved.TYPE not in schema:
-                raise ValidationError("No \"type\" field found in type definition")
+                raise ValidationError(f"No \"type\" field found in definition of {path}")
 
             ty = schema[Reserved.TYPE]
 
             if ty == Primitive.NUMBER.value:
-                validate_number(data, schema)
+                validate_number(data, schema, path)
             elif ty == Primitive.STRING.value:
-                validate_string(data, schema)
+                validate_string(data, schema, path)
             elif ty == Collection.ARRAY.value:
-                validate_array(data, schema, self)
+                validate_array(data, schema, self, path)
             elif ty == Collection.OBJECT.value:
-                validate_object(data, schema, self)
+                validate_object(data, schema, self, path)
             else:
                 raise ValidationError(f"Unknown type {ty}")
         else:

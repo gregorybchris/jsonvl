@@ -6,7 +6,7 @@ from jsonvl.exceptions.errors import ValidationError
 TYPE_NAME = Primitive.STRING.value
 
 
-def validate_string(data, schema):
+def validate_string(data, schema, path):
     """
     Validate a JSON string based on a schema.
 

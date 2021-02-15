@@ -1,0 +1,35 @@
+{
+  "type": "object",
+  "attrs": {
+    "montagues": {
+      "type": "array",
+      "elem": {
+        "type": "object",
+        "attrs": {
+          "name": "string",
+          "depth": {
+            "type": "number",
+            "cons": {
+              "lt": 3
+            }
+          }
+        }
+      }
+    },
+    "capulets": {
+      "type": "array",
+      "elem": {
+        "type": "object",
+        "attrs": {
+          "name": "string",
+          "depth": {
+            "type": "number",
+            "cons": {
+              "lt": 3
+            }
+          }
+        }
+      }
+    }
+  }
+}

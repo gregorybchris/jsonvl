@@ -1,0 +1,15 @@
+{
+  "type": "array",
+  "elem": {
+    "type": "object",
+    "attrs": {
+      "name": "string",
+      "loves": "string",
+      "act": {
+        "cons": {
+          "lt": 2
+        }
+      }
+    }
+  }
+}

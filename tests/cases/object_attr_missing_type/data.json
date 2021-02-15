@@ -1,0 +1,22 @@
+[
+  {
+    "name": "Lysander",
+    "loves": "Hermia",
+    "act": 1
+  },
+  {
+    "name": "Hermia",
+    "loves": "Lysander",
+    "act": 1
+  },
+  {
+    "name": "Helena",
+    "loves": "Demetrius",
+    "act": 1
+  },
+  {
+    "name": "Demetrius",
+    "loves": "Hermia",
+    "act": 1
+  }
+]

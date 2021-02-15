@@ -3,7 +3,7 @@ from jsonvl.constants.reserved import Reserved
 from jsonvl.exceptions.errors import ValidationError
 
 
-def validate_object(data, schema, validator):
+def validate_object(data, schema, validator, path):
     """
     Validate a JSON object based on a schema.
 
@@ -29,4 +29,5 @@ def validate_object(data, schema, validator):
                               f"not defined in the schema ({attrs_schema})")
 
     for attr, attr_type in attrs_schema.items():
-        validator.validate(data[attr], attr_type)
+        new_path = f'{path}.{attr}'
+        validator._validate(data[attr], attr_type, new_path)
