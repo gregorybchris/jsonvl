@@ -1,0 +1,9 @@
+{
+  "type": "array",
+  "elem": {
+    "type": "string"
+  },
+  "cons": {
+    "unique": true
+  }
+}
