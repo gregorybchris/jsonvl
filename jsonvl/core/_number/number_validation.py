@@ -37,12 +37,14 @@ def validate_number(data, schema, path):
                 _constrain_gte(cons_name, data, cons_value, path)
             elif cons_name == NumberConstraints.EQ.value:
                 _constrain_eq(cons_name, data, cons_value, path)
+            else:
+                raise ValidationError(f"The constraint {cons_name} is not implemented for type {TYPE_NAME}")
 
 
 def _check_type(cons_name, data, value):
     if not isinstance(value, (int, float)):
         raise ValidationError(f"The {cons_name} constraint value ({value}) "
-                              f"for the data {data} must be a {TYPE_NAME}")
+                              f"for the data {data} must be of {TYPE_NAME} type")
 
 
 def _constrain_lt(cons_name, data, value, path):

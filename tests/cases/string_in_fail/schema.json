@@ -1,0 +1,15 @@
+{
+  "type": "array",
+  "elem": {
+    "type": "object",
+    "attrs": {
+      "name": "string",
+      "play": {
+        "type": "string",
+        "cons": {
+          "in": ["The Tempest", "Much Ado About Nothing", "Twelfth Night"]
+        }
+      }
+    }
+  }
+}

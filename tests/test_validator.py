@@ -13,6 +13,8 @@ class TestValidator:
         if case.expect[CaseSchema.RESULT]:
             validate(case.data, case.schema)
         else:
+            if CaseSchema.ERROR not in case.expect:
+                raise ValueError("Test case missing error message")
             with pytest.raises(ValidationError, match=case.expect[CaseSchema.ERROR]):
                 validate(case.data, case.schema)
 

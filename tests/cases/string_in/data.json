@@ -1,0 +1,34 @@
+[
+  {
+    "name": "Viola",
+    "play": "Twelfth Night"
+  },
+  {
+    "name": "Sebastian",
+    "play": "Twelfth Night"
+  },
+  {
+    "name": "Duke Orsino",
+    "play": "Twelfth Night"
+  },
+  {
+    "name": "Balthasar",
+    "play": "Much Ado About Nothing"
+  },
+  {
+    "name": "Benedick",
+    "play": "Much Ado About Nothing"
+  },
+  {
+    "name": "Beatrice",
+    "play": "Much Ado About Nothing"
+  },
+  {
+    "name": "Miranda",
+    "play": "The Tempest"
+  },
+  {
+    "name": "Caliban",
+    "play": "The Tempest"
+  }
+]

@@ -1,0 +1,11 @@
+{
+  "type": "object",
+  "attrs": {
+    "name": {
+      "type": "string",
+      "cons": {
+        "eq": "Titus Andronicus"
+      }
+    }
+  }
+}
