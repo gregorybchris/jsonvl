@@ -5,6 +5,7 @@ from jsonvl.utilities.venum import Venum
 class Primitive(Venum):
     """Enum for primitive data types."""
 
+    BOOLEAN = 'boolean'
     NUMBER = 'number'
     STRING = 'string'
 
