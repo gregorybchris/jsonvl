@@ -28,7 +28,7 @@ from jsonvl import validate_file
 validate_file('data.json', 'schema.json')
 ```
 
-### Roadmap
+## Roadmap
 
 - [x] JSON data type checking
   - [x] Number, string, boolean, and null primitives
@@ -52,5 +52,58 @@ validate_file('data.json', 'schema.json')
 - [x] Quantifiers for array traversal
 - [ ] Type definitions and references
 - [ ] Conditional validation
-- [ ] Union types
+- [ ] Union types (including nullable)
 - [ ] Custom constraints
+
+## Example
+
+### Data
+
+```json
+{
+  "play": "A Midsummer Night’s Dream",
+  "characters": [
+    { "name": "Helena", "loves": ["Demitrius"] },
+    { "name": "Demitrius", "loves": ["Hermia", "Helena"] },
+    { "name": "Hermia", "loves": ["Lysander"] },
+    { "name": "Lysander", "loves": ["Hermia", "Helena", "Hermia"] },
+    { "name": "Titania", "loves": ["Oberon", "Bottom", "Oberon"] },
+    { "name": "Oberon", "loves": ["Titania"] },
+    { "name": "Bottom", "loves": [] },
+    { "name": "Puck", "loves": [] }
+  ]
+}
+```
+
+### Schema
+
+```json
+{
+  "type": "object",
+  "attrs": {
+    "play": "string",
+    "characters": {
+      "type": "array",
+      "cons": {
+        "unique": "@all.name"
+      },
+      "elem": {
+        "type": "object",
+        "attrs": {
+          "name": {
+            "type": "string",
+            "cons": {
+              "format": { "type": "regex", "pattern": "[A-Z][a-z]{0,10}" }
+            }
+          },
+          "loves": {
+            "type": "array",
+            "elem": "string",
+            "cons": { "max_size": 4 }
+          }
+        }
+      }
+    }
+  }
+}
+```
