@@ -1,0 +1,4 @@
+{
+  "result": false,
+  "error": "The regex format constraint requires a \"pattern\" parameter"
+}

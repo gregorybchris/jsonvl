@@ -1,0 +1,8 @@
+{
+  "type": "string",
+  "cons": {
+    "format": {
+      "type": "regex"
+    }
+  }
+}

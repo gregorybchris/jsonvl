@@ -1,0 +1,9 @@
+{
+  "type": "string",
+  "cons": {
+    "format": {
+      "type": "regex",
+      "pattern": "to be|not to be"
+    }
+  }
+}
