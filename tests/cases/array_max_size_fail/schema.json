@@ -1,0 +1,7 @@
+{
+  "type": "array",
+  "elem": "string",
+  "cons": {
+    "max_size": 3
+  }
+}

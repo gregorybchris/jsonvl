@@ -1,0 +1,7 @@
+{
+  "type": "array",
+  "elem": "string",
+  "cons": {
+    "min_size": 7
+  }
+}

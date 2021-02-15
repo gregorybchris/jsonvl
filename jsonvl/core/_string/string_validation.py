@@ -35,27 +35,27 @@ def validate_string(data, schema, path):
                 raise ValidationError(f"The constraint {cons_name} is not implemented for type {TYPE_NAME}")
 
 
-def _check_array_type(cons_name, data, value):
-    if not isinstance(value, list):
-        raise ValidationError(f"The {cons_name} constraint value ({value}) "
+def _check_array_type(cons_name, data, cons_param):
+    if not isinstance(cons_param, list):
+        raise ValidationError(f"The {cons_name} constraint value ({cons_param}) "
                               f"for the data {data} must be of {Collection.ARRAY.value} type")
 
 
-def _check_string_type(cons_name, data, value):
-    if not isinstance(value, str):
-        raise ValidationError(f"The {cons_name} constraint value ({value}) "
+def _check_string_type(cons_name, data, cons_param):
+    if not isinstance(cons_param, str):
+        raise ValidationError(f"The {cons_name} constraint value ({cons_param}) "
                               f"for the data {data} must be of {Collection.STRING.value} type")
 
 
-def _constrain_eq(cons_name, data, value, path):
-    _check_string_type(cons_name, data, value)
-    if data != value:
-        raise ValidationError(f"The value {data} (at {path}) must equal {value} to meet "
+def _constrain_eq(cons_name, data, cons_param, path):
+    _check_string_type(cons_name, data, cons_param)
+    if data != cons_param:
+        raise ValidationError(f"The value {data} (at {path}) must equal {cons_param} to meet "
                               f"the \"{cons_name}\" constraint.")
 
 
-def _constrain_in(cons_name, data, value, path):
-    _check_array_type(cons_name, data, value)
-    if data not in value:
-        raise ValidationError(f"The value {data} (at {path}) must be one of {value} to meet "
+def _constrain_in(cons_name, data, cons_param, path):
+    _check_array_type(cons_name, data, cons_param)
+    if data not in cons_param:
+        raise ValidationError(f"The value {data} (at {path}) must be one of {cons_param} to meet "
                               f"the \"{cons_name}\" constraint.")
