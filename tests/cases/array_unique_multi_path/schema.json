@@ -1,0 +1,14 @@
+{
+  "type": "array",
+  "elem": {
+    "type": "object",
+    "attrs": {
+      "name": "string",
+      "relationship": "string",
+      "to": "string"
+    }
+  },
+  "cons": {
+    "unique": ["@all.name", "@all.relationship"]
+  }
+}

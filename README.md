@@ -34,7 +34,7 @@ validate_file('data.json', 'schema.json')
 - [x] Array and object collections
 - [x] Number constraints
 - [ ] Path traversal for multi-level constraints
-- [ ] Exists and forall quantifiers for array traversal
+- [ ] Any and all quantifiers for array traversal
 - [ ] Conditional validation
 - [ ] Union types
 - [ ] Type definitions and references

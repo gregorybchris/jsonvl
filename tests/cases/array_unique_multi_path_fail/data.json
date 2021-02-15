@@ -1,0 +1,32 @@
+[
+  {
+    "name": "Duncan",
+    "relationship": "king",
+    "to": "Scotland"
+  },
+  {
+    "name": "Donalbain",
+    "relationship": "son",
+    "to": "Duncan"
+  },
+  {
+    "name": "Macbeth",
+    "relationship": "general",
+    "to": "Duncan"
+  },
+  {
+    "name": "Banquo",
+    "relationship": "friend",
+    "to": "Macbeth"
+  },
+  {
+    "name": "Fleance",
+    "relationship": "son",
+    "to": "Banquo"
+  },
+  {
+    "name": "Lady Macbeth",
+    "relationship": "wife",
+    "to": "Macbeth"
+  }
+]

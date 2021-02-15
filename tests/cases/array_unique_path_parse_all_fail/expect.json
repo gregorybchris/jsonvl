@@ -1,0 +1,4 @@
+{
+  "result": false,
+  "error": "Failed to collect items from path when parsing array type, use \"@all\""
+}
