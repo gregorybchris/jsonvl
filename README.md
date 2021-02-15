@@ -30,9 +30,24 @@ validate_file('data.json', 'schema.json')
 
 ### Roadmap
 
-- [x] Number, string, boolean, and null primitives
-- [x] Array and object collections
+- [x] JSON data type checking
+  - [x] Number, string, boolean, and null primitives
+  - [x] Array and object collections
 - [x] Number constraints
+  - [x] lt
+  - [x] gt
+  - [x] eq
+- [x] String constraints
+  - [x] in
+  - [x] eq
+  - [x] format
+    - [x] regex
+    - [x] phone
+    - [x] email
+- [x] Array constraints
+  - [x] max_size
+  - [x] min_size
+  - [x] unique
 - [x] Path traversal for multi-level constraints
 - [x] Quantifiers for array traversal
 - [ ] Type definitions and references
