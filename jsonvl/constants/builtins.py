@@ -6,6 +6,7 @@ class Primitive(Venum):
     """Enum for primitive data types."""
 
     BOOLEAN = 'boolean'
+    NULL = 'null'
     NUMBER = 'number'
     STRING = 'string'
 

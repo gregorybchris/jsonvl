@@ -30,7 +30,7 @@ validate_file('data.json', 'schema.json')
 
 ### Roadmap
 
-- [x] Number, string, and boolean primitives
+- [x] Number, string, boolean, and null primitives
 - [x] Array and object collections
 - [x] Number constraints
 - [ ] Path traversal for multi-level constraints
