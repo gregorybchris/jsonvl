@@ -11,13 +11,13 @@ version = Path(package_dir, 'version.txt').read_text().strip()
 
 setup(
     name='jsonvl',
-    description='JSON validator.',
+    description='JSON schema validator.',
     author='Chris Gregory',
     author_email='christopher.b.gregory@gmail.com',
     url='https://github.com/gregorybchris/jsonvl',
     long_description=open('README.md').read(),
     long_description_content_type='text/markdown',
-    keywords=['json', 'validator', 'checker', 'types', 'typing'],
+    keywords=['json', 'schema', 'validator', 'checker', 'types', 'typing', 'constraint'],
     version=version,
     license='Apache Software License',
     install_requires=requirements,
@@ -25,12 +25,12 @@ setup(
     packages=find_packages(exclude=['tests']),
     entry_points={"console_scripts": ["jsonvl=jsonvl.cli.main:run"]},
     classifiers=[
-        'Development Status :: 5 - Production/Stable',
+        'Development Status :: 4 - Beta',
         'Intended Audience :: Developers',
-        'Operating System :: MacOS :: MacOS X',
-        'Topic :: Software Development',
         'License :: OSI Approved :: Apache Software License',
         'Programming Language :: Python',
+        'Programming Language :: Python :: 3.6'
+        'Programming Language :: Python :: 3.7'
         'Programming Language :: Python :: 3.8'
     ]
 )
