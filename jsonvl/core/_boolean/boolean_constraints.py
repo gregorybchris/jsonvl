@@ -1,4 +1,3 @@
-
 """Boolean constraints."""
 from jsonvl.utilities.venum import Venum
 

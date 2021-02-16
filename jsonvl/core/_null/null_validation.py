@@ -1,6 +1,6 @@
 """String validation."""
 from jsonvl.constants.builtins import Primitive
-from jsonvl.exceptions.errors import ValidationError
+from jsonvl.errors import JsonValidationError, ErrorMessages
 
 
 TYPE_NAME = Primitive.NULL.value
@@ -14,4 +14,4 @@ def validate_null(data, schema, path):
     :param schema: JSON schema as a Python object.
     """
     if data is not None:
-        raise ValidationError(f"{data} is not a valid {TYPE_NAME}")
+        raise JsonValidationError.create(ErrorMessages.NOT_OF_TYPE, data=data, type=TYPE_NAME)

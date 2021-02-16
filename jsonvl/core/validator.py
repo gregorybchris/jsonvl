@@ -1,13 +1,13 @@
 """JSON validator."""
 from jsonvl.constants.reserved import Reserved
 from jsonvl.constants.builtins import Collection, Primitive
-from jsonvl.exceptions.errors import ValidationError
 from jsonvl.core._array.array_validation import validate_array
 from jsonvl.core._boolean.boolean_validation import validate_boolean
 from jsonvl.core._null.null_validation import validate_null
 from jsonvl.core._number.number_validation import validate_number
 from jsonvl.core._object.object_validation import validate_object
 from jsonvl.core._string.string_validation import validate_string
+from jsonvl.errors import JsonValidationError, ErrorMessages
 
 
 class Validator:
@@ -29,7 +29,7 @@ class Validator:
     def _validate(self, data, schema, path):
         if isinstance(schema, str):
             if not Primitive.has(schema) and not Collection.has(schema):
-                raise ValidationError(f"Type {schema} is not a valid type")
+                raise JsonValidationError.create(ErrorMessages.UNKNOWN_TYPE, type=schema)
 
             if schema == Primitive.STRING.value:
                 validate_string(data, schema, path)
@@ -37,7 +37,7 @@ class Validator:
                 validate_number(data, schema, path)
         elif isinstance(schema, dict):
             if Reserved.TYPE not in schema:
-                raise ValidationError(f"No \"type\" field found in definition of {path}")
+                raise JsonValidationError.create(ErrorMessages.MISSING_TYPE_FIELD, path=path)
 
             ty = schema[Reserved.TYPE]
 
@@ -54,6 +54,6 @@ class Validator:
             elif ty == Collection.OBJECT.value:
                 validate_object(data, schema, self, path)
             else:
-                raise ValidationError(f"Unknown type {ty}")
+                raise JsonValidationError.create(ErrorMessages.UNKNOWN_TYPE, type=ty)
         else:
-            raise ValidationError(f"Could not parse type {schema} for data {data}")
+            raise JsonValidationError.create(ErrorMessages.FAILED_TYPE_PARSE, type=schema, data=data)

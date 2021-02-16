@@ -1,4 +1,4 @@
 {
   "result": false,
-  "error": "The value King John \\(at json\\[6\\]\\.play\\) must be one of \\['The Tempest', 'Much Ado About Nothing', 'Twelfth Night'\\] to meet the \"in\" constraint."
+  "error": "Failed in \\(\\['The Tempest', 'Much Ado About Nothing', 'Twelfth Night'\\]\\) constraint with value King John"
 }

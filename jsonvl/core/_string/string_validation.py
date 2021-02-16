@@ -1,11 +1,11 @@
 """String validation."""
 import re
 
-from jsonvl.constants.reserved import Reserved
 from jsonvl.constants.builtins import Collection, Primitive
+from jsonvl.constants.reserved import Reserved
 from jsonvl.core._string.string_constraints import (
     StringConstraints, StringFormatting, StringFormats, StringFormatters)
-from jsonvl.exceptions.errors import ValidationError
+from jsonvl.errors import JsonValidationError, ErrorMessages
 
 
 TYPE_NAME = Primitive.STRING.value
@@ -19,7 +19,7 @@ def validate_string(data, schema, path):
     :param schema: JSON schema as a Python object.
     """
     if not isinstance(data, str):
-        raise ValidationError(f"{data} is not a valid {TYPE_NAME}")
+        raise JsonValidationError.create(ErrorMessages.NOT_OF_TYPE, data=data, type=TYPE_NAME)
 
     if isinstance(schema, str):
         return
@@ -28,7 +28,8 @@ def validate_string(data, schema, path):
         type_constraints = schema[Reserved.CONSTRAINTS]
         for cons_name, cons_value in type_constraints.items():
             if not StringConstraints.has(cons_name):
-                raise ValidationError(f"The type {TYPE_NAME} has no constraint {cons_name}")
+                raise JsonValidationError.create(ErrorMessages.INVALID_CONSTRAINT,
+                                                 type=TYPE_NAME, cons=cons_name)
 
             if cons_name == StringConstraints.IN.value:
                 _constrain_in(cons_name, data, cons_value, path)
@@ -37,60 +38,62 @@ def validate_string(data, schema, path):
             elif cons_name == StringConstraints.FORMAT.value:
                 _constrain_format(cons_name, data, cons_value, path)
             else:
-                raise ValidationError(f"The constraint {cons_name} is not implemented for type {TYPE_NAME}")
+                raise JsonValidationError.create(ErrorMessages.INVALID_CONSTRAINT,
+                                                 type=TYPE_NAME, cons=cons_name)
 
 
-def _check_array_type(cons_name, data, cons_param):
+def _check_array_type(cons_name, cons_param):
     if not isinstance(cons_param, list):
-        raise ValidationError(f"The {cons_name} constraint value ({cons_param}) "
-                              f"for the data {data} must be of {Collection.ARRAY.value} type")
+        raise JsonValidationError.create(ErrorMessages.INVALID_CONSTRAINT_PARAM,
+                                         cons=cons_name, param_types=[Collection.ARRAY.value], param=cons_param)
 
 
-def _check_string_type(cons_name, data, cons_param):
+def _check_string_type(cons_name, cons_param):
     if not isinstance(cons_param, str):
-        raise ValidationError(f"The {cons_name} constraint value ({cons_param}) "
-                              f"for the data {data} must be of {Primitive.STRING.value} type")
+        raise JsonValidationError.create(ErrorMessages.INVALID_CONSTRAINT_PARAM,
+                                         cons=cons_name, param_types=[Primitive.STRING.value], param=cons_param)
 
 
 def _constrain_in(cons_name, data, cons_param, path):
-    _check_array_type(cons_name, data, cons_param)
+    _check_array_type(cons_name, cons_param)
     if data not in cons_param:
-        raise ValidationError(f"The value {data} (at {path}) must be one of {cons_param} to meet "
-                              f"the \"{cons_name}\" constraint.")
+        raise JsonValidationError.create(ErrorMessages.FAILED_CONSTRAINT,
+                                         cons=cons_name, param=cons_param, data=data)
 
 
 def _constrain_eq(cons_name, data, cons_param, path):
-    _check_string_type(cons_name, data, cons_param)
+    _check_string_type(cons_name, cons_param)
     if data != cons_param:
-        raise ValidationError(f"The value {data} (at {path}) must equal {cons_param} to meet "
-                              f"the \"{cons_name}\" constraint.")
+        raise JsonValidationError.create(ErrorMessages.FAILED_CONSTRAINT,
+                                         cons=cons_name, param=cons_param, data=data)
 
 
 def _constrain_format(cons_name, data, cons_param, path):
     if isinstance(cons_param, str):
         if not StringFormats.has(cons_param):
-            raise ValidationError(f"Unknown format \"{cons_param}\", perhaps try a regex format instead")
+            raise JsonValidationError.create(ErrorMessages.UNKNOWN_STRING_FORMAT, format=cons_param)
 
         if cons_param == StringFormats.PHONE.value:
             pattern = r"^[2-9]\d{2}-\d{3}-\d{4}$"
         elif cons_param == StringFormats.EMAIL.value:
             pattern = r"^\S+@\S+\.\S+$"
         else:
-            raise ValidationError(f"The format {cons_param} is not implemented")
+            raise JsonValidationError.create(ErrorMessages.UNKNOWN_STRING_FORMAT, format=cons_param)
 
         if not re.match(pattern, data):
-            raise ValidationError(f"The data {data} did not match the {cons_param} format")
+            raise JsonValidationError.create(ErrorMessages.INCORRECT_FORMAT, data=data, format=cons_param)
     elif isinstance(cons_param, dict):
         if StringFormatting.TYPE.value not in cons_param:
-            raise ValidationError("The formatter \"type\" is required when defining a format constraint")
+            raise JsonValidationError.create(ErrorMessages.MISSING_FORMAT_TYPE_FIELD, path=path)
 
         formatter = cons_param[StringFormatting.TYPE.value]
         if formatter == StringFormatters.REGEX.value:
             if StringFormatting.PATTERN.value not in cons_param:
-                raise ValidationError("The regex format constraint requires a \"pattern\" parameter")
+                raise JsonValidationError.create(ErrorMessages.MISSING_FORMAT_PATTERN_FIELD, path=path)
             pattern = cons_param[StringFormatting.PATTERN.value]
             if not re.match(pattern, data):
-                raise ValidationError(f"The data \"{data}\" did not match the provided regex pattern \"{pattern}\"")
+                raise JsonValidationError.create(ErrorMessages.INCORRECT_FORMAT, data=data, format=pattern)
     else:
-        raise ValidationError(f"The {cons_name} constraint value ({cons_param}) "
-                              f"must be of {Primitive.STRING.value} or {Collection.OBJECT.value} type")
+        valid_types = [Primitive.STRING.value, Collection.OBJECT.value]
+        raise JsonValidationError.create(ErrorMessages.INVALID_CONSTRAINT_PARAM,
+                                         cons=cons_name, param_types=valid_types, param=cons_param)

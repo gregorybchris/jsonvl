@@ -1,4 +1,4 @@
 {
   "result": false,
-  "error": "Failed to collect items from path when parsing array type, use \"@all\""
+  "error": "Failed to parse path, use \"@all\" when constructing a path with an array"
 }

@@ -1,4 +1,4 @@
 {
   "result": false,
-  "error": "The data prospero@milan did not match the email format"
+  "error": "Value prospero@milan does not match the email format"
 }

@@ -1,4 +1,4 @@
 {
   "result": false,
-  "error": "The regex format constraint requires a \"pattern\" parameter"
+  "error": "\"pattern\" field required in format definition at path json"
 }

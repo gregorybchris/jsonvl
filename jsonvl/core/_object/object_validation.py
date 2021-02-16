@@ -1,6 +1,10 @@
 """Object validation."""
+from jsonvl.constants.builtins import Collection
 from jsonvl.constants.reserved import Reserved
-from jsonvl.exceptions.errors import ValidationError
+from jsonvl.errors import JsonValidationError, ErrorMessages
+
+
+TYPE_NAME = Collection.OBJECT.value
 
 
 def validate_object(data, schema, validator, path):
@@ -11,22 +15,22 @@ def validate_object(data, schema, validator, path):
     :param schema: JSON schema as a Python object.
     """
     if not isinstance(data, dict):
-        raise ValidationError(f"Expected {data} to be an object")
+        raise JsonValidationError.create(ErrorMessages.NOT_OF_TYPE, data=data, type=TYPE_NAME)
 
     if Reserved.ATTRIBUTES not in schema:
-        raise ValidationError("Object types must define all attribute types with an \"attrs\" field")
+        raise JsonValidationError.create(ErrorMessages.MISSING_OBJECT_ATTRS_FIELD)
 
     attrs_schema = schema[Reserved.ATTRIBUTES]
 
     missing_attrs_data = attrs_schema.keys() - data.keys()
     if len(missing_attrs_data) != 0:
-        raise ValidationError(f"Data ({data}) is missing required attributes ({missing_attrs_data}) "
-                              f"from the schema ({attrs_schema})")
+        raise JsonValidationError.create(ErrorMessages.MISSING_OBJECT_ATTRS,
+                                         data=data, missing_attrs=missing_attrs_data, schema=attrs_schema)
 
     missing_attrs_schema = data.keys() - attrs_schema.keys()
     if len(missing_attrs_schema) != 0:
-        raise ValidationError(f"Data ({data}) has extra attributes ({missing_attrs_schema}) "
-                              f"not defined in the schema ({attrs_schema})")
+        raise JsonValidationError.create(ErrorMessages.EXTRA_OBJECT_ATTRS,
+                                         data=data, extra_attrs=missing_attrs_schema, schema=attrs_schema)
 
     for attr, attr_type in attrs_schema.items():
         new_path = f'{path}.{attr}'

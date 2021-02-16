@@ -1,6 +1,6 @@
 """String validation."""
 from jsonvl.constants.builtins import Primitive
-from jsonvl.exceptions.errors import ValidationError
+from jsonvl.errors import JsonValidationError, ErrorMessages
 
 
 TYPE_NAME = Primitive.BOOLEAN.value
@@ -14,6 +14,4 @@ def validate_boolean(data, schema, path):
     :param schema: JSON schema as a Python object.
     """
     if not isinstance(data, bool):
-        raise ValidationError(f"{data} is not a valid {TYPE_NAME}")
-
-    # TODO: Handle constrained string
+        raise JsonValidationError.craete(ErrorMessages.NOT_OF_TYPE, data=data, type=TYPE_NAME)

@@ -1,4 +1,4 @@
 {
   "result": false,
-  "error": "Constraint \"unique\" was not met with duplicate item son"
+  "error": "Unique constraint failed on duplicate item son"
 }

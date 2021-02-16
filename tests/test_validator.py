@@ -3,7 +3,7 @@ import pytest
 from pathlib import Path
 
 from jsonvl import validate, validate_file
-from jsonvl.exceptions.errors import ValidationError
+from jsonvl.errors import JsonValidationError
 
 from .constants import CaseSchema
 
@@ -15,7 +15,7 @@ class TestValidator:
         else:
             if CaseSchema.ERROR not in case.expect:
                 raise ValueError("Test case missing error message")
-            with pytest.raises(ValidationError, match=case.expect[CaseSchema.ERROR]):
+            with pytest.raises(JsonValidationError, match=case.expect[CaseSchema.ERROR]):
                 validate(case.data, case.schema)
 
     def test_validate_file(self):

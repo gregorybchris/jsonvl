@@ -1,4 +1,3 @@
-
 """Object constraints."""
 from jsonvl.utilities.venum import Venum
 

@@ -1,4 +1,4 @@
 {
   "result": false,
-  "error": "Constraint \"min_size\" \\(7\\) was not met with array size 4"
+  "error": "Failed min_size \\(7\\) constraint with value 4"
 }

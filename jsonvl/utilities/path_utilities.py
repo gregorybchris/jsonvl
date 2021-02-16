@@ -3,7 +3,7 @@ import itertools
 import re
 
 from jsonvl.constants.reserved import Reserved
-from jsonvl.exceptions.errors import ValidationError
+from jsonvl.errors import JsonValidationError, ErrorMessages
 
 
 def collect(data, path):
@@ -25,17 +25,17 @@ def _collect(data, path_tokens):
     token = path_tokens[0]
     if isinstance(data, list):
         if token != Reserved.ALL:
-            raise ValidationError("Failed to collect items from path when parsing array type, use \"@all\"")
+            raise JsonValidationError.create(ErrorMessages.FAILED_PATH_PARSE_ARRAY)
 
         lists_collected = [_collect(value, path_tokens[1:]) for value in data]
         return list(itertools.chain.from_iterable(lists_collected))
     elif isinstance(data, dict):
         if token not in data:
-            raise ValidationError(f"Failed to parse path at token {token}")
+            raise JsonValidationError.create(ErrorMessages.FAILED_PATH_PARSE_TOKEN, token=token)
 
         return _collect(data[token], path_tokens[1:])
     else:
-        raise ValidationError(f"Failed to parse path at token {token}")
+        raise JsonValidationError.create(ErrorMessages.FAILED_PATH_PARSE_TOKEN, token=token)
 
 
 def _parse_path(path):

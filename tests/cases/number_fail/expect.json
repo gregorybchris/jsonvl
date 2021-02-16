@@ -1,4 +1,4 @@
 {
   "result": false,
-  "error": "4 is not a valid number"
+  "error": "Value 4 is not of expected type number"
 }

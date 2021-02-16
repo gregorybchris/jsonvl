@@ -1,4 +1,4 @@
 {
   "result": false,
-  "error": "The data 351-123-123 did not match the phone format"
+  "error": "Value 351-123-123 does not match the phone format"
 }

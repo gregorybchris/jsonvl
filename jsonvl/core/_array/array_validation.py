@@ -1,9 +1,9 @@
 """Array validation."""
-from jsonvl.constants.reserved import Reserved
 from jsonvl.constants.builtins import Primitive, Collection
+from jsonvl.constants.reserved import Reserved
 from jsonvl.core._array.array_constraints import ArrayConstraints
-from jsonvl.exceptions.errors import ValidationError
 from jsonvl.utilities.path_utilities import collect
+from jsonvl.errors import JsonValidationError, ErrorMessages
 
 
 TYPE_NAME = Collection.ARRAY.value
@@ -17,10 +17,10 @@ def validate_array(data, schema, validator, path):
     :param schema: JSON schema as a Python object.
     """
     if not isinstance(data, list):
-        raise ValidationError(f"Expected {data} to be an array")
+        raise JsonValidationError.create(ErrorMessages.NOT_OF_TYPE, data=data, type=TYPE_NAME)
 
     if Reserved.ELEMENT not in schema:
-        raise ValidationError("Array types must define the element type with the \"elem\" field")
+        raise JsonValidationError.create(ErrorMessages.MISSING_ARRAY_ELEM)
 
     elem_schema = schema[Reserved.ELEMENT]
     for i, elem in enumerate(data):
@@ -31,7 +31,7 @@ def validate_array(data, schema, validator, path):
         type_constraints = schema[Reserved.CONSTRAINTS]
         for cons_name, cons_param in type_constraints.items():
             if not ArrayConstraints.has(cons_name):
-                raise ValidationError(f"The type {TYPE_NAME} has no constraint {cons_name}")
+                raise JsonValidationError.create(ErrorMessages.INVALID_CONSTRAINT, type=TYPE_NAME, cons=cons_name)
 
             if cons_name == ArrayConstraints.MAX_SIZE.value:
                 _constrain_max_size(cons_name, data, cons_param, path)
@@ -40,7 +40,7 @@ def validate_array(data, schema, validator, path):
             elif cons_name == ArrayConstraints.UNIQUE.value:
                 _constrain_unique(cons_name, data, cons_param, path)
             else:
-                raise ValidationError(f"The constraint {cons_name} is not implemented for type {TYPE_NAME}")
+                raise JsonValidationError.create(ErrorMessages.INVALID_CONSTRAINT, type=TYPE_NAME, cons=cons_name)
 
 
 def _constrain_unique(cons_name, data, cons_param, path):
@@ -53,32 +53,32 @@ def _constrain_unique(cons_name, data, cons_param, path):
         for cons_path in cons_param:
             _constrain_unique(cons_name, data, cons_path, path)
     else:
-        raise ValidationError(f"The {cons_name} constraint value ({cons_param}) "
-                              f"for the data {data} must be of "
-                              f"{Primitive.BOOLEAN.value}, "
-                              f"{Primitive.STRING.value}, or "
-                              f"{Collection.ARRAY.value} type")
-
+        valid_types = [Primitive.BOOLEAN.value, Primitive.STRING.value, Collection.ARRAY.value]
+        raise JsonValidationError.create(ErrorMessages.INVALID_CONSTRAINT_PARAM,
+                                         cons=cons_name, param_types=valid_types, param=cons_param)
     for x_i, x in enumerate(items):
         for y_i, y in enumerate(items):
             if x_i != y_i and x == y:
-                raise ValidationError(f"Constraint \"{cons_name}\" was not met with "
-                                      f"duplicate item {x}")
+                raise JsonValidationError.create(ErrorMessages.FAILED_UNIQUE, item=x)
 
 
 def _constrain_max_size(cons_name, data, cons_param, path):
     if not isinstance(cons_param, int):
-        raise ValidationError(f"Expected \"{cons_name}\" param ({cons_param}) to be an integer")
+        raise JsonValidationError.create(ErrorMessages.PARAM_NOT_OF_TYPE,
+                                         param=cons_param, cons=cons_name, type='integer')
 
     array_size = len(data)
     if array_size > cons_param:
-        raise ValidationError(f"Constraint \"{cons_name}\" ({cons_param}) was not met with array size {array_size}")
+        raise JsonValidationError.create(ErrorMessages.FAILED_CONSTRAINT,
+                                         cons=cons_name, param=cons_param, data=array_size)
 
 
 def _constrain_min_size(cons_name, data, cons_param, path):
     if not isinstance(cons_param, int):
-        raise ValidationError(f"Expected \"{cons_name}\" param ({cons_param}) to be an integer")
+        raise JsonValidationError.create(ErrorMessages.PARAM_NOT_OF_TYPE,
+                                         cons=cons_name, param=cons_param, type='integer')
 
     array_size = len(data)
     if array_size < cons_param:
-        raise ValidationError(f"Constraint \"{cons_name}\" ({cons_param}) was not met with array size {array_size}")
+        raise JsonValidationError.create(ErrorMessages.FAILED_CONSTRAINT,
+                                         cons=cons_name, param=cons_param, data=array_size)

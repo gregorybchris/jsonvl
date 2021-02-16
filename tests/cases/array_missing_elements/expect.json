@@ -1,4 +1,4 @@
 {
   "result": false,
-  "error": "Array types must define the element type with the \"elem\" field"
+  "error": "Array type missing required \"elem\" field"
 }

@@ -1,4 +1,4 @@
 {
   "result": false,
-  "error": "Constraint \"max_size\" \\(3\\) was not met with array size 4"
+  "error": "Failed max_size \\(3\\) constraint with value 4"
 }

@@ -1,4 +1,4 @@
 {
   "result": false,
-  "error": "No \"type\" field found in definition of json\\[0\\]\\.act"
+  "error": "\"type\" field required in type definition at path json\\[0\\].act"
 }
