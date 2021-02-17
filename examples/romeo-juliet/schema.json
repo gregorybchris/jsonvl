@@ -1,0 +1,13 @@
+{
+  "type": "array",
+  "elem": [
+    {
+      "type": "object",
+      "attr": {
+        "name": "string",
+        "house": "string"
+      }
+    },
+    "string"
+  ]
+}

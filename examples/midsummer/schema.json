@@ -1,0 +1,31 @@
+{
+  "type": "object",
+  "attr": {
+    "play": "string",
+    "characters": {
+      "type": "array",
+      "cons": {
+        "unique": "@all.name"
+      },
+      "elem": {
+        "type": "object",
+        "attr": {
+          "name": "#name",
+          "loves": {
+            "type": "array",
+            "elem": "#name",
+            "cons": { "max_size": 4 }
+          }
+        }
+      }
+    }
+  },
+  "defs": {
+    "#name": {
+      "type": "string",
+      "cons": {
+        "format": { "type": "regex", "pattern": "[A-Z][a-z]{0,10}" }
+      }
+    }
+  }
+}

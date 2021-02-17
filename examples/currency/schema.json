@@ -1,0 +1,35 @@
+{
+  "type": "object",
+  "attr": {
+    "farthing": {
+      "type": "number",
+      "cons": {
+        "lt": 3
+      }
+    },
+    "penny": {
+      "type": "number",
+      "cons": {
+        "gt": 3
+      }
+    },
+    "shilling": {
+      "type": "number",
+      "cons": {
+        "lte": 3
+      }
+    },
+    "crown": {
+      "type": "number",
+      "cons": {
+        "gte": 3
+      }
+    },
+    "pound": {
+      "type": "number",
+      "cons": {
+        "eq": 3
+      }
+    }
+  }
+}

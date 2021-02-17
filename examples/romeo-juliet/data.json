@@ -1,0 +1,24 @@
+[
+  {
+    "name": "Romeo",
+    "house": "Montague"
+  },
+  {
+    "name": "Benvolio",
+    "house": "Montague"
+  },
+  {
+    "name": "Mercutio",
+    "house": "Verona"
+  },
+  {
+    "name": "Juliet",
+    "house": "Capulet"
+  },
+  {
+    "name": "Tybalt",
+    "house": "Capulet"
+  },
+  "Friar Laurence",
+  "Friar John"
+]

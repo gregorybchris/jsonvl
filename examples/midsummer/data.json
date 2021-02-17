@@ -1,0 +1,13 @@
+{
+  "play": "A Midsummer Night's Dream",
+  "characters": [
+    { "name": "Helena", "loves": ["Demitrius"] },
+    { "name": "Demitrius", "loves": ["Hermia", "Helena"] },
+    { "name": "Hermia", "loves": ["Lysander"] },
+    { "name": "Lysander", "loves": ["Hermia", "Helena", "Hermia"] },
+    { "name": "Titania", "loves": ["Oberon", "Bottom", "Oberon"] },
+    { "name": "Oberon", "loves": ["Titania"] },
+    { "name": "Bottom", "loves": [] },
+    { "name": "Puck", "loves": [] }
+  ]
+}
