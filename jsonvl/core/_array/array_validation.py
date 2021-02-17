@@ -3,7 +3,7 @@ from jsonvl.constants.builtins import Collection, Primitive
 from jsonvl.constants.reserved import Reserved
 from jsonvl.core._array.array_constraints import ArrayConstraints
 from jsonvl.errors import ErrorMessages, JsonSchemaError, JsonValidationError
-from jsonvl.utilities.path_utilities import collect
+from jsonvl._utilities.path_utilities import collect
 
 
 TYPE_NAME = Collection.ARRAY.value

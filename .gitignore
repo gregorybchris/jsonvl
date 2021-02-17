@@ -16,3 +16,6 @@ htmlcov
 
 # IDE
 .vscode
+
+# Docs
+docs

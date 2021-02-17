@@ -1,5 +1,5 @@
 """Array constraints."""
-from jsonvl.utilities.venum import Venum
+from jsonvl._utilities.venum import Venum
 
 
 class ArrayConstraints(Venum):

@@ -8,6 +8,7 @@ from jsonvl.core._string.string_formatting import (
     StringFormatPatterns, StringFormats, StringFormatters, StringFormatting)
 from jsonvl.errors import ErrorMessages, JsonSchemaError, JsonValidationError
 
+
 TYPE_NAME = Primitive.STRING.value
 
 

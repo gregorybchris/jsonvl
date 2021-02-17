@@ -16,7 +16,7 @@ setup(
     author='Chris Gregory',
     author_email='christopher.b.gregory@gmail.com',
     url='https://github.com/gregorybchris/jsonvl',
-    long_description=open('README.md').read(),
+    long_description=open(package_dir / 'README.md').read(),
     long_description_content_type='text/markdown',
     keywords=['json', 'schema', 'validator', 'checker', 'types', 'typing', 'constraint'],
     version=version,
