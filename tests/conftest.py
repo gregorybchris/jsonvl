@@ -24,6 +24,7 @@ class Case:
         self.name = name
         self.data = data
         self.schema = schema
+        self.meta_filepath = meta_filepath
         self.result = result
         self.error = error
         self.error_type = error_type

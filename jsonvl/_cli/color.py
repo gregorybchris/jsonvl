@@ -19,6 +19,6 @@ def print_color(*args, color=None, **kwargs):
     :param color: The color to print.
     """
     if color is not None:
-        print(color, end="")
-    print(*args, **kwargs)
-    print(Color.RESET, end="")
+        print(color, *args, Color.RESET, **kwargs)
+    else:
+        print(*args, **kwargs)

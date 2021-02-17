@@ -14,4 +14,4 @@ def validate_boolean(data, schema, defs, path):
     :param schema: JSON schema as a Python object.
     """
     if not isinstance(data, bool):
-        raise JsonValidationError.craete(ErrorMessages.NOT_OF_TYPE, data=data, type=TYPE_NAME)
+        raise JsonValidationError.create(ErrorMessages.NOT_OF_TYPE, data=data, type=TYPE_NAME)
