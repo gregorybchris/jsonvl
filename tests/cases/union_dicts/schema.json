@@ -3,7 +3,7 @@
   "elem": [
     {
       "type": "object",
-      "attrs": {
+      "attr": {
         "name": "string",
         "house": "string"
       }

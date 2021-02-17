@@ -1,5 +1,6 @@
 {
   "result": false,
   "error": "Failed lt \\(3\\) constraint with value 3",
+  "error_type": "data",
   "markers": []
 }

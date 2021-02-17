@@ -1,0 +1,7 @@
+{
+  "type": "array",
+  "elem": "#name",
+  "defs": {
+    "#age": "number"
+  }
+}

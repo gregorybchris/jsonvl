@@ -3,7 +3,9 @@ from pathlib import Path
 import pytest
 
 from jsonvl import validate, validate_file
-from jsonvl.errors import JsonValidationError
+from jsonvl.errors import JsonSchemaError, JsonValidationError
+
+from .constants import Cases
 
 
 class TestValidator:
@@ -12,8 +14,16 @@ class TestValidator:
             validate(case.data, case.schema)
         else:
             error_exact_regex = f"^{case.error}$"
-            with pytest.raises(JsonValidationError, match=error_exact_regex):
-                validate(case.data, case.schema)
+            if case.error_type == Cases.DATA_ERROR:
+                with pytest.raises(JsonValidationError, match=error_exact_regex):
+                    validate(case.data, case.schema)
+            elif case.error_type == Cases.SCHEMA_ERROR:
+                with pytest.raises(JsonSchemaError, match=error_exact_regex):
+                    validate(case.data, case.schema)
+
+            else:
+                raise ValueError(f"Test case {case.name} has invalid \"{Cases.ERROR_TYPE}\" "
+                                 f"field at {case.meta_filepath}")
 
     def test_validate_file(self):
         cases_dir = Path(__file__).parent / 'cases'

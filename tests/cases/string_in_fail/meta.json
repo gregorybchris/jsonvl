@@ -1,5 +1,6 @@
 {
   "result": false,
   "error": "Failed in \\(\\['The Tempest', 'Much Ado About Nothing', 'Twelfth Night'\\]\\) constraint with value King John",
+  "error_type": "data",
   "markers": []
 }

@@ -7,12 +7,14 @@ from jsonvl.errors import ErrorMessages
 from .constants import PyTest
 
 
-REGION_ERROR_MESSAGES = 'error-messages'
+REGION_DATA_ERRORS = 'data-errors'
+REGION_SCHEMA_ERRORS = 'schema-errors'
 
 
 class TestErrorMessages:
     @pytest.fixture(params=[
-        REGION_ERROR_MESSAGES
+        REGION_DATA_ERRORS,
+        REGION_SCHEMA_ERRORS,
     ], scope=PyTest.SESSION)
     def region_name(self, request):
         return request.param

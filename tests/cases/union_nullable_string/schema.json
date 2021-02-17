@@ -1,6 +1,6 @@
 {
   "type": "object",
-  "attrs": {
+  "attr": {
     "maybe": ["string", "null"]
   }
 }

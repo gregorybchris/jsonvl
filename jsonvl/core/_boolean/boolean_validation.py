@@ -6,7 +6,7 @@ from jsonvl.errors import ErrorMessages, JsonValidationError
 TYPE_NAME = Primitive.BOOLEAN.value
 
 
-def validate_boolean(data, schema, path):
+def validate_boolean(data, schema, defs, path):
     """
     Validate a JSON boolean based on a schema.
 

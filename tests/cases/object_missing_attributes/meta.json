@@ -1,5 +1,6 @@
 {
   "result": false,
-  "error": "Object types must define all attribute types with an \"attrs\" field",
+  "error": "Object types must define all attribute types with an \"attr\" field",
+  "error_type": "schema",
   "markers": []
 }

@@ -1,5 +1,6 @@
 {
   "result": false,
   "error": "Unique constraint failed on duplicate item son",
+  "error_type": "data",
   "markers": []
 }

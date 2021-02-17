@@ -1,0 +1,12 @@
+[
+  {
+    "name": "Viola",
+    "loves": {
+      "name": "Duke Orsino",
+      "loves": {
+        "name": "Olivia",
+        "loves": "Cesario"
+      }
+    }
+  }
+]

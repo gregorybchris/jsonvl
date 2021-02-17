@@ -1,5 +1,6 @@
 {
   "result": false,
   "error": "Value 351-123-123 does not match the phone format",
+  "error_type": "data",
   "markers": []
 }

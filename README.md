@@ -50,9 +50,8 @@ validate_file('data.json', 'schema.json')
   - [x] unique
 - [x] Path traversal for multi-level constraints
 - [x] Quantifiers for array traversal
-- [ ] Type definitions and references
-- [ ] Conditional validation
-- [ ] Union types (including nullable)
+- [x] Union types (including nullable)
+- [x] Type definitions and references
 - [ ] Custom constraints
 
 ## Example
@@ -80,7 +79,7 @@ validate_file('data.json', 'schema.json')
 ```json
 {
   "type": "object",
-  "attrs": {
+  "attr": {
     "play": "string",
     "characters": {
       "type": "array",
@@ -89,19 +88,22 @@ validate_file('data.json', 'schema.json')
       },
       "elem": {
         "type": "object",
-        "attrs": {
-          "name": {
-            "type": "string",
-            "cons": {
-              "format": { "type": "regex", "pattern": "[A-Z][a-z]{0,10}" }
-            }
-          },
+        "attr": {
+          "name": "#name",
           "loves": {
             "type": "array",
-            "elem": "string",
+            "elem": "#name",
             "cons": { "max_size": 4 }
           }
         }
+      }
+    }
+  },
+  "defs": {
+    "#name": {
+      "type": "string",
+      "cons": {
+        "format": { "type": "regex", "pattern": "[A-Z][a-z]{0,10}" }
       }
     }
   }

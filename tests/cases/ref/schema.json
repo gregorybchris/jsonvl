@@ -1,0 +1,16 @@
+{
+  "type": "array",
+  "elem": {
+    "type": "object",
+    "attr": {
+      "name": "#name",
+      "brother": "#name",
+      "counterpart": "#name"
+    }
+  },
+  "defs": {
+    "#name": {
+      "type": "string"
+    }
+  }
+}

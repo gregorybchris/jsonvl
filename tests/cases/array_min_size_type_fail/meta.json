@@ -1,0 +1,6 @@
+{
+  "result": false,
+  "error": "Constraint min_size requires a parameter of the following types: \\['integer'\\], received 3\\.0",
+  "error_type": "schema",
+  "markers": []
+}

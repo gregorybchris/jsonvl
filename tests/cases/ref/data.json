@@ -1,0 +1,22 @@
+[
+  {
+    "name": "Antipholus of Ephesus",
+    "brother": "Antipholus of Syracuse",
+    "counterpart": "Dromio of Ephesus"
+  },
+  {
+    "name": "Antipholus of Syracuse",
+    "brother": "Antipholus of Ephesus",
+    "counterpart": "Dromio of Syracuse"
+  },
+  {
+    "name": "Dromio of Ephesus",
+    "brother": "Dromio of Syracuse",
+    "counterpart": "Antipholus of Ephesus"
+  },
+  {
+    "name": "Dromio of Syracuse",
+    "brother": "Dromio of Ephesus",
+    "counterpart": "Antipholus of Syracuse"
+  }
+]

@@ -1,0 +1,38 @@
+{
+  "type": "array",
+  "elem": {
+    "type": "object",
+    "attr": {
+      "name": "#viola",
+      "loves": {
+        "type": "object",
+        "attr": {
+          "name": "string",
+          "loves": {
+            "type": "object",
+            "attr": {
+              "name": "string",
+              "loves": "#viola"
+            }
+          }
+        },
+        "defs": {
+          "#viola": {
+            "type": "string",
+            "cons": {
+              "eq": "Cesario"
+            }
+          }
+        }
+      }
+    }
+  },
+  "defs": {
+    "#viola": {
+      "type": "string",
+      "cons": {
+        "eq": "Viola"
+      }
+    }
+  }
+}

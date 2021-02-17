@@ -1,11 +1,11 @@
 {
   "type": "object",
-  "attrs": {
+  "attr": {
     "montagues": {
       "type": "array",
       "elem": {
         "type": "object",
-        "attrs": {
+        "attr": {
           "name": "string",
           "depth": {
             "type": "number",
@@ -20,7 +20,7 @@
       "type": "array",
       "elem": {
         "type": "object",
-        "attrs": {
+        "attr": {
           "name": "string",
           "depth": {
             "type": "number",

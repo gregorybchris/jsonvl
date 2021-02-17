@@ -2,7 +2,7 @@
   "type": "array",
   "elem": {
     "type": "object",
-    "attrs": {
+    "attr": {
       "name": "string",
       "play": {
         "type": "string",

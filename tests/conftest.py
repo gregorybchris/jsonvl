@@ -1,21 +1,33 @@
+from ast import parse
 import json
 from pathlib import Path
 
 import pytest
 
-from .constants import CaseSchema, Cases, PyTest
+from .constants import Cases, PyTest
 
 
 CASES_DIRPATH = Path(__file__).parent / 'cases'
 
 
 class Case:
-    def __init__(self, name, data, schema, result, error, markers):
+    def __init__(
+        self,
+        name,
+        data,
+        schema,
+        meta_filepath,
+        result=True,
+        error=None,
+        error_type=None,
+        markers=None,
+    ):
         self.name = name
         self.data = data
         self.schema = schema
         self.result = result
         self.error = error
+        self.error_type = error_type
         self.markers = markers
 
     def __repr__(self):
@@ -38,19 +50,25 @@ def collect_cases():
         meta_filepath = case_dirpath / Cases.META_FILENAME
         with open(meta_filepath, 'r') as f:
             meta = json.load(f)
-            if CaseSchema.ERROR not in meta:
-                raise ValueError(f"Test case {name} missing \"{CaseSchema.ERROR}\" field at {meta_filepath}")
-            if CaseSchema.MARKERS not in meta:
-                raise ValueError(f"Test case {name} missing \"{CaseSchema.MARKERS}\" field at {meta_filepath}")
-            if CaseSchema.RESULT not in meta:
-                raise ValueError(f"Test case {name} missing \"{CaseSchema.RESULT}\" field at {meta_filepath}")
 
-            result = meta[CaseSchema.RESULT]
-            error = meta[CaseSchema.ERROR]
-            markers = meta[CaseSchema.MARKERS]
+        validate_meta(meta, meta_filepath, name)
 
-        all_cases.append(Case(name, data, schema, result, error, markers))
+        all_cases.append(Case(name, data, schema, meta_filepath, **meta))
     return all_cases
+
+
+def validate_meta(meta, meta_filepath, name):
+    if Cases.RESULT not in meta:
+        raise ValueError(f"Test case {name} missing \"{Cases.RESULT}\" field at {meta_filepath}")
+
+    if meta[Cases.RESULT]:
+        for field in [Cases.ERROR, Cases.ERROR_TYPE]:
+            if field in meta and meta[field] is not None:
+                raise ValueError(f"Test case {name} has unexpected \"{field}\" field at {meta_filepath}")
+    else:
+        for field in [Cases.ERROR, Cases.ERROR_TYPE]:
+            if field not in meta or meta[field] is None:
+                raise ValueError(f"Test case {name} missing required \"{field}\" field at {meta_filepath}")
 
 
 @pytest.fixture(params=collect_cases(), ids=lambda x: x.name, scope=PyTest.SESSION)

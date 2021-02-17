@@ -1,6 +1,6 @@
 {
   "type": "object",
-  "attrs": {
+  "attr": {
     "age": "number",
     "name": "string"
   }

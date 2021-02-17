@@ -6,7 +6,7 @@ from jsonvl.errors import ErrorMessages, JsonValidationError
 TYPE_NAME = Primitive.NULL.value
 
 
-def validate_null(data, schema, path):
+def validate_null(data, schema, defs, path):
     """
     Validate a JSON null based on a schema.
 
