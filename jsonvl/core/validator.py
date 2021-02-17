@@ -28,32 +28,51 @@ class Validator:
 
     def _validate(self, data, schema, path):
         if isinstance(schema, str):
-            if not Primitive.has(schema) and not Collection.has(schema):
-                raise JsonValidationError.create(ErrorMessages.UNKNOWN_TYPE, type=schema)
+            type = schema
+            if not Primitive.has(type) and not Collection.has(type):
+                raise JsonValidationError.create(ErrorMessages.UNKNOWN_TYPE, type=type)
 
-            if schema == Primitive.STRING.value:
-                validate_string(data, schema, path)
-            elif schema == Primitive.NUMBER.value:
-                validate_number(data, schema, path)
+            elif type == Primitive.BOOLEAN.value:
+                validate_boolean(data, type, path)
+            elif type == Primitive.NULL.value:
+                validate_null(data, type, path)
+            elif type == Primitive.NUMBER.value:
+                validate_number(data, type, path)
+            elif type == Primitive.STRING.value:
+                validate_string(data, type, path)
+            else:
+                raise JsonValidationError.create(ErrorMessages.UNKNOWN_TYPE, type=type)
+        elif isinstance(schema, list):
+            types = schema
+            successful_type = None
+            for type in types:
+                try:
+                    self._validate(data, type, path)
+                    successful_type = type
+                    break
+                except JsonValidationError:
+                    pass
+            if successful_type is None:
+                raise JsonValidationError.create(ErrorMessages.FAILED_UNION_TYPE_PARSE, data=data, types=types)
         elif isinstance(schema, dict):
             if Reserved.TYPE not in schema:
                 raise JsonValidationError.create(ErrorMessages.MISSING_TYPE_FIELD, path=path)
 
-            ty = schema[Reserved.TYPE]
+            type = schema[Reserved.TYPE]
 
-            if ty == Primitive.NUMBER.value:
-                validate_number(data, schema, path)
-            elif ty == Primitive.STRING.value:
-                validate_string(data, schema, path)
-            elif ty == Primitive.BOOLEAN.value:
+            if type == Primitive.BOOLEAN.value:
                 validate_boolean(data, schema, path)
-            elif ty == Primitive.NULL.value:
+            elif type == Primitive.NULL.value:
                 validate_null(data, schema, path)
-            elif ty == Collection.ARRAY.value:
+            elif type == Primitive.NUMBER.value:
+                validate_number(data, schema, path)
+            elif type == Primitive.STRING.value:
+                validate_string(data, schema, path)
+            elif type == Collection.ARRAY.value:
                 validate_array(data, schema, self, path)
-            elif ty == Collection.OBJECT.value:
+            elif type == Collection.OBJECT.value:
                 validate_object(data, schema, self, path)
             else:
-                raise JsonValidationError.create(ErrorMessages.UNKNOWN_TYPE, type=ty)
+                raise JsonValidationError.create(ErrorMessages.UNKNOWN_TYPE, type=type)
         else:
             raise JsonValidationError.create(ErrorMessages.FAILED_TYPE_PARSE, type=schema, data=data)

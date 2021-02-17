@@ -1,0 +1,5 @@
+{
+  "result": false,
+  "error": "Failed to parse path, use \"@all\" when constructing a path with an array",
+  "markers": []
+}

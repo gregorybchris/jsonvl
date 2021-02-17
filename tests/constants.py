@@ -4,10 +4,11 @@ class PyTest:
 
 class Cases:
     DATA_FILENAME = 'data.json'
+    META_FILENAME = 'meta.json'
     SCHEMA_FILENAME = 'schema.json'
-    EXPECT_FILENAME = 'expect.json'
 
 
 class CaseSchema:
     ERROR = 'error'
     RESULT = 'result'
+    MARKERS = 'markers'

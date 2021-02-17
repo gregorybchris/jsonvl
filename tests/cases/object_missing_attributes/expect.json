@@ -1,4 +1,0 @@
-{
-  "result": false,
-  "error": "Object types must define all attribute types with an \"attrs\" field"
-}

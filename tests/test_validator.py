@@ -1,21 +1,18 @@
-import pytest
-
 from pathlib import Path
+
+import pytest
 
 from jsonvl import validate, validate_file
 from jsonvl.errors import JsonValidationError
 
-from .constants import CaseSchema
-
 
 class TestValidator:
     def test_all_cases(self, case):
-        if case.expect[CaseSchema.RESULT]:
+        if case.result:
             validate(case.data, case.schema)
         else:
-            if CaseSchema.ERROR not in case.expect:
-                raise ValueError("Test case missing error message")
-            with pytest.raises(JsonValidationError, match=case.expect[CaseSchema.ERROR]):
+            error_exact_regex = f"^{case.error}$"
+            with pytest.raises(JsonValidationError, match=error_exact_regex):
                 validate(case.data, case.schema)
 
     def test_validate_file(self):

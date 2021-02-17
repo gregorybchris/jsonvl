@@ -1,0 +1,5 @@
+{
+  "result": false,
+  "error": "\"pattern\" field required in format definition at path json",
+  "markers": []
+}
