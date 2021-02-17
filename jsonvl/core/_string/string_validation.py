@@ -3,9 +3,9 @@ import re
 
 from jsonvl.constants.builtins import Collection, Primitive
 from jsonvl.constants.reserved import Reserved
+from jsonvl.core._string.string_constraints import StringConstraints
 from jsonvl.core._string.string_formatting import (
     StringFormatPatterns, StringFormats, StringFormatters, StringFormatting)
-from jsonvl.core._string.string_constraints import StringConstraints
 from jsonvl.errors import ErrorMessages, JsonSchemaError, JsonValidationError
 
 TYPE_NAME = Primitive.STRING.value

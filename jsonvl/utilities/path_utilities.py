@@ -3,7 +3,7 @@ import itertools
 import re
 
 from jsonvl.constants.reserved import Reserved
-from jsonvl.errors import ErrorMessages, JsonSchemaError, JsonValidationError
+from jsonvl.errors import ErrorMessages, JsonSchemaError
 
 
 def collect(data, path):
