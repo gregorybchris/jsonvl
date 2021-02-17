@@ -1,3 +1,8 @@
+v0.1.2
+------
+
+* Bug fix for broken CLI
+
 v0.1.1
 ------
 
