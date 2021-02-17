@@ -24,7 +24,7 @@ setup(
     install_requires=requirements,
     extras_require={'testing': test_requirements},
     packages=find_packages(exclude=['tests']),
-    entry_points={'console_scripts': ['jsonvl=jsonvl.cli.main:run']},
+    entry_points={'console_scripts': ['jsonvl=jsonvl._cli.main:run']},
     classifiers=[
         'Development Status :: 4 - Beta',
         'Intended Audience :: Developers',

@@ -2,7 +2,7 @@
 import argparse
 
 from jsonvl import validate_file
-from jsonvl.cli.color import Color, print_color
+from jsonvl._cli.color import Color, print_color
 
 
 def run():
