@@ -1,7 +1,7 @@
 """Object validation."""
 from jsonvl.constants.builtins import Collection
 from jsonvl.constants.reserved import Reserved
-from jsonvl.errors import JsonValidationError, ErrorMessages
+from jsonvl.errors import ErrorMessages, JsonValidationError
 
 
 TYPE_NAME = Collection.OBJECT.value

@@ -61,7 +61,7 @@ validate_file('data.json', 'schema.json')
 
 ```json
 {
-  "play": "A Midsummer Night’s Dream",
+  "play": "A Midsummer Night's Dream",
   "characters": [
     { "name": "Helena", "loves": ["Demitrius"] },
     { "name": "Demitrius", "loves": ["Hermia", "Helena"] },

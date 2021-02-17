@@ -1,9 +1,9 @@
 """Array validation."""
-from jsonvl.constants.builtins import Primitive, Collection
+from jsonvl.constants.builtins import Collection, Primitive
 from jsonvl.constants.reserved import Reserved
 from jsonvl.core._array.array_constraints import ArrayConstraints
+from jsonvl.errors import ErrorMessages, JsonValidationError
 from jsonvl.utilities.path_utilities import collect
-from jsonvl.errors import JsonValidationError, ErrorMessages
 
 
 TYPE_NAME = Collection.ARRAY.value

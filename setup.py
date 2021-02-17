@@ -1,6 +1,7 @@
 """Setup module for setuptools."""
 from pathlib import Path
-from setuptools import setup, find_packages
+
+from setuptools import find_packages, setup
 
 
 package_dir = Path(__file__).parent.absolute()
@@ -23,14 +24,18 @@ setup(
     install_requires=requirements,
     extras_require={'testing': test_requirements},
     packages=find_packages(exclude=['tests']),
-    entry_points={"console_scripts": ["jsonvl=jsonvl.cli.main:run"]},
+    entry_points={'console_scripts': ['jsonvl=jsonvl.cli.main:run']},
     classifiers=[
         'Development Status :: 4 - Beta',
         'Intended Audience :: Developers',
         'License :: OSI Approved :: Apache Software License',
+        'Operating System :: OS Independent',
         'Programming Language :: Python',
-        'Programming Language :: Python :: 3.6'
-        'Programming Language :: Python :: 3.7'
-        'Programming Language :: Python :: 3.8'
-    ]
+        'Programming Language :: Python :: 3.6',
+        'Programming Language :: Python :: 3.7',
+        'Programming Language :: Python :: 3.8',
+        'Environment :: Console',
+        'Natural Language :: English',
+        'Topic :: Utilities',
+    ],
 )

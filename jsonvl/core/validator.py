@@ -1,13 +1,13 @@
 """JSON validator."""
-from jsonvl.constants.reserved import Reserved
 from jsonvl.constants.builtins import Collection, Primitive
+from jsonvl.constants.reserved import Reserved
 from jsonvl.core._array.array_validation import validate_array
 from jsonvl.core._boolean.boolean_validation import validate_boolean
 from jsonvl.core._null.null_validation import validate_null
 from jsonvl.core._number.number_validation import validate_number
 from jsonvl.core._object.object_validation import validate_object
 from jsonvl.core._string.string_validation import validate_string
-from jsonvl.errors import JsonValidationError, ErrorMessages
+from jsonvl.errors import ErrorMessages, JsonValidationError
 
 
 class Validator:

@@ -2,7 +2,7 @@
 from jsonvl.constants.builtins import Primitive
 from jsonvl.constants.reserved import Reserved
 from jsonvl.core._number.number_constraints import NumberConstraints
-from jsonvl.errors import JsonValidationError, ErrorMessages
+from jsonvl.errors import ErrorMessages, JsonValidationError
 
 
 TYPE_NAME = Primitive.NUMBER.value

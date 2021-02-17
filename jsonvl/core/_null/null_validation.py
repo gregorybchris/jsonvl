@@ -1,6 +1,6 @@
 """String validation."""
 from jsonvl.constants.builtins import Primitive
-from jsonvl.errors import JsonValidationError, ErrorMessages
+from jsonvl.errors import ErrorMessages, JsonValidationError
 
 
 TYPE_NAME = Primitive.NULL.value
