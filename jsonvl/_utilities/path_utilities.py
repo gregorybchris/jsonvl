@@ -14,7 +14,8 @@ def collect(data, path):
     :param path: Path through the data to the collected elements.
     :return: List of JSON data elements that match the given path.
     """
-    path_tokens = _parse_path(path)
+    path_tokens = re.split(r'(?<!\\)\.|(?<!\\)@', path)
+    path_tokens = [token.replace('\\', '') for token in path_tokens if token != '']
     return _collect(data, path_tokens)
 
 
@@ -36,7 +37,3 @@ def _collect(data, path_tokens):
         return _collect(data[token], path_tokens[1:])
     else:
         raise JsonSchemaError.create(ErrorMessages.FAILED_PATH_PARSE_TOKEN, token=token)
-
-
-def _parse_path(path):
-    return [token for token in re.split(r'(?<!\\)\.|(?<!\\)@', path) if token != '']
