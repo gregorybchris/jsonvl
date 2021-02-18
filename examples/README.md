@@ -1,6 +1,6 @@
 # Examples
 
-This folder contains examples of the jsonvl schema format. All of these examples can be validated in the command line with `jsonvl data.json schema.json`.
+This folder contains examples of the JsonVL schema format. All of these examples can be validated in the command line with `jsonvl data.json schema.json`.
 
 **[currency](./currency)**
 
