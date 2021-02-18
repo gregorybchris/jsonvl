@@ -1,4 +1,4 @@
-name: jsonvl continuous integration
+name: jsonvl-ci
 
 on:
   push:
