@@ -1,5 +1,8 @@
 # jsonvl
 
+[![GitHub CI](https://github.com/gregorybchris/jsonvl/workflows/jsonvl-ci/badge.svg?branch=main)](https://github.com/gregorybchris/jsonvl/actions?query=workflow%3Ajsonvl-ci)
+[![codecov](https://codecov.io/gh/gregorybchris/jsonvl/branch/main/graph/badge.svg?token=S8VQAMZ2OP)](https://codecov.io/gh/gregorybchris/jsonvl)
+
 jsonvl is a JSON validator for Python. This project is intended to be a replacement for the [jsonschema package](https://pypi.org/project/jsonschema/) which implements the [JSON Schema standard](https://json-schema.org/). jsonvl's goal is to curate a rich set of validation methods for JSON data types while remaining extensible to new constraints.
 
 ## Installation
