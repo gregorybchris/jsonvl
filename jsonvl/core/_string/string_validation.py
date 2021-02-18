@@ -28,10 +28,6 @@ def validate_string(data, schema, defs, path):
     if Reserved.CONSTRAINTS in schema:
         type_constraints = schema[Reserved.CONSTRAINTS]
         for cons_name, cons_value in type_constraints.items():
-            if not StringConstraints.has(cons_name):
-                raise JsonSchemaError.create(ErrorMessages.INVALID_CONSTRAINT,
-                                             type=TYPE_NAME, cons=cons_name)
-
             if cons_name == StringConstraints.IN.value:
                 _constrain_in(cons_name, data, cons_value, path)
             elif cons_name == StringConstraints.EQ.value:
@@ -65,9 +61,6 @@ def _constrain_eq(cons_name, data, cons_param, path):
 
 def _constrain_format(cons_name, data, cons_param, path):
     if isinstance(cons_param, str):
-        if not StringFormats.has(cons_param):
-            raise JsonSchemaError.create(ErrorMessages.UNKNOWN_STRING_FORMAT, format=cons_param)
-
         if cons_param == StringFormats.EMAIL.value:
             pattern = StringFormatPatterns.EMAIL
         elif cons_param == StringFormats.PHONE.value:
@@ -88,6 +81,8 @@ def _constrain_format(cons_name, data, cons_param, path):
             pattern = cons_param[StringFormatting.PATTERN.value]
             if not re.match(pattern, data):
                 raise JsonValidationError.create(ErrorMessages.INCORRECT_FORMAT, data=data, format=pattern)
+        else:
+            raise JsonSchemaError.create(ErrorMessages.UNKNOWN_STRING_FORMATTER, formatter=formatter)
     else:
         valid_types = [Primitive.STRING.value, Collection.OBJECT.value]
         raise JsonSchemaError.create(ErrorMessages.INVALID_CONSTRAINT_PARAM_TYPE,

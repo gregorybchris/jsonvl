@@ -1,0 +1,6 @@
+{
+  "type": "number",
+  "cons": {
+    "lt": 1
+  }
+}

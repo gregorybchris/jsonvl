@@ -14,4 +14,13 @@ class Venum(Enum):
         :param value: Data value to check for enum membership.
         :return: True if the value is in the enum, otherwise False.
         """
-        return value in [v.value for v in cls.__members__.values()]
+        return value in cls.get_all()
+
+    @classmethod
+    def get_all(cls) -> bool:
+        """
+        Get a list of all values in the enumeration.
+
+        :return: List of all enumeration values.
+        """
+        return [v.value for v in cls.__members__.values()]

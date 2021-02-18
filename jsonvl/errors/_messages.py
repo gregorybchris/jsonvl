@@ -23,6 +23,7 @@ class ErrorMessages:
     FAILED_PATH_PARSE_ARRAY = "Failed to parse path, use \"@all\" when constructing a path with an array"
     FAILED_PATH_PARSE_TOKEN = "Failed to parse path at token {token}"
     FAILED_SCHEMA_TYPE_PARSE = "Could not parse schema type {type}"
+    INVALID_COLLECTION_SCHEMA = "Collection type {type} must also define its child types"
     INVALID_CONSTRAINT = "Type {type} does not support the constraint {cons}"
     INVALID_CONSTRAINT_PARAM_TYPE = "Constraint {cons} requires a parameter " \
                                     "of the following types: {param_types}, received {param}"
@@ -33,6 +34,7 @@ class ErrorMessages:
     MISSING_TYPE_FIELD = "\"type\" field required in type definition at path {path}"
     REFERENCE_NOT_FOUND = "Could not find the definition {ref}"
     UNKNOWN_STRING_FORMAT = "Unknown string format {format}, perhaps try a regex format instead"
+    UNKNOWN_STRING_FORMATTER = "Unknown string formatter {formatter}"
     UNKNOWN_TYPE = "Unknown type {type}"
 
     # endregion

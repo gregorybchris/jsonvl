@@ -1,0 +1,6 @@
+{
+  "type": "number",
+  "cons": {
+    "gte": 5
+  }
+}

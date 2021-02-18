@@ -30,9 +30,6 @@ def validate_array(data, schema, defs, path, validator):
     if Reserved.CONSTRAINTS in schema:
         type_constraints = schema[Reserved.CONSTRAINTS]
         for cons_name, cons_param in type_constraints.items():
-            if not ArrayConstraints.has(cons_name):
-                raise JsonSchemaError.create(ErrorMessages.INVALID_CONSTRAINT, type=TYPE_NAME, cons=cons_name)
-
             if cons_name == ArrayConstraints.MAX_SIZE.value:
                 _constrain_max_size(cons_name, data, cons_param, path)
             elif cons_name == ArrayConstraints.MIN_SIZE.value:

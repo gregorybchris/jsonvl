@@ -24,10 +24,6 @@ def validate_number(data, schema, defs, path):
     if Reserved.CONSTRAINTS in schema:
         type_constraints = schema[Reserved.CONSTRAINTS]
         for cons_name, cons_param in type_constraints.items():
-            if not NumberConstraints.has(cons_name):
-                raise JsonSchemaError.create(ErrorMessages.INVALID_CONSTRAINT,
-                                             type=TYPE_NAME, cons=cons_name)
-
             if cons_name == NumberConstraints.LT.value:
                 _constrain_lt(cons_name, data, cons_param, path)
             elif cons_name == NumberConstraints.GT.value:
@@ -43,42 +39,42 @@ def validate_number(data, schema, defs, path):
                                              type=TYPE_NAME, cons=cons_name)
 
 
-def _check_type(cons_name, cons_param):
+def _check_number_type(cons_name, cons_param):
     if not isinstance(cons_param, (int, float)):
         raise JsonSchemaError.create(ErrorMessages.INVALID_CONSTRAINT_PARAM_TYPE,
                                      cons=cons_name, param_types=[Primitive.NUMBER.value], param=cons_param)
 
 
 def _constrain_lt(cons_name, data, cons_param, path):
-    _check_type(cons_name, cons_param)
+    _check_number_type(cons_name, cons_param)
     if data >= cons_param:
         raise JsonValidationError.create(ErrorMessages.FAILED_CONSTRAINT,
                                          cons=cons_name, param=cons_param, data=data)
 
 
 def _constrain_gt(cons_name, data, cons_param, path):
-    _check_type(cons_name, cons_param)
+    _check_number_type(cons_name, cons_param)
     if data <= cons_param:
         raise JsonValidationError.create(ErrorMessages.FAILED_CONSTRAINT,
                                          cons=cons_name, param=cons_param, data=data)
 
 
 def _constrain_lte(cons_name, data, cons_param, path):
-    _check_type(cons_name, cons_param)
+    _check_number_type(cons_name, cons_param)
     if data > cons_param:
         raise JsonValidationError.create(ErrorMessages.FAILED_CONSTRAINT,
                                          cons=cons_name, param=cons_param, data=data)
 
 
 def _constrain_gte(cons_name, data, cons_param, path):
-    _check_type(cons_name, cons_param)
+    _check_number_type(cons_name, cons_param)
     if data < cons_param:
         raise JsonValidationError.create(ErrorMessages.FAILED_CONSTRAINT,
                                          cons=cons_name, param=cons_param, data=data)
 
 
 def _constrain_eq(cons_name, data, cons_param, path):
-    _check_type(cons_name, cons_param)
+    _check_number_type(cons_name, cons_param)
     if data != cons_param:
         raise JsonValidationError.create(ErrorMessages.FAILED_CONSTRAINT,
                                          cons=cons_name, param=cons_param, data=data)

@@ -1,0 +1,12 @@
+{
+  "type": "array",
+  "elem": {
+    "type": "object",
+    "attr": {
+      "name": "string"
+    }
+  },
+  "cons": {
+    "unique": "@all.name.first"
+  }
+}

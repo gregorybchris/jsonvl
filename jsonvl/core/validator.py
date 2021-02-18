@@ -41,8 +41,8 @@ class Validator:
                 else:
                     raise JsonSchemaError.create(ErrorMessages.REFERENCE_NOT_FOUND, ref=ref)
 
-            if not Primitive.has(type) and not Collection.has(type):
-                raise JsonSchemaError.create(ErrorMessages.UNKNOWN_TYPE, type=type)
+            if Collection.has(type):
+                raise JsonSchemaError.create(ErrorMessages.INVALID_COLLECTION_SCHEMA, type=type)
 
             elif type == Primitive.BOOLEAN.value:
                 validate_boolean(data, type, defs, path)

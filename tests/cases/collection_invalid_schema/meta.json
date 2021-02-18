@@ -1,0 +1,6 @@
+{
+  "result": false,
+  "error": "Collection type array must also define its child types",
+  "error_type": "schema",
+  "markers": []
+}

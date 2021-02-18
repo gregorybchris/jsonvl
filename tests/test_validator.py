@@ -20,7 +20,6 @@ class TestValidator:
             elif case.error_type == Cases.SCHEMA_ERROR:
                 with pytest.raises(JsonSchemaError, match=error_exact_regex):
                     validate(case.data, case.schema)
-
             else:
                 raise ValueError(f"Test case {case.name} has invalid \"{Cases.ERROR_TYPE}\" "
                                  f"field at {case.meta_filepath}")

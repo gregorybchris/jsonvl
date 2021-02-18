@@ -1,0 +1,12 @@
+{
+  "type": "array",
+  "elem": {
+    "type": "object",
+    "attr": {
+      "person": "string"
+    }
+  },
+  "cons": {
+    "unique": "@all.name"
+  }
+}

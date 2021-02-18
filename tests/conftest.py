@@ -1,4 +1,5 @@
 import json
+import re
 from pathlib import Path
 
 import pytest
@@ -10,17 +11,8 @@ CASES_DIRPATH = Path(__file__).parent / 'cases'
 
 
 class Case:
-    def __init__(
-        self,
-        name,
-        data,
-        schema,
-        meta_filepath,
-        result=True,
-        error=None,
-        error_type=None,
-        markers=None,
-    ):
+    def __init__(self, name, data, schema, meta_filepath,
+                 result=True, error=None, error_type=None, markers=None):
         self.name = name
         self.data = data
         self.schema = schema
@@ -37,6 +29,8 @@ class Case:
 def collect_cases():
     all_cases = []
     for case_dirpath in CASES_DIRPATH.iterdir():
+        validate_case_dirpath(case_dirpath)
+
         name = case_dirpath.name
 
         data_filepath = case_dirpath / Cases.DATA_FILENAME
@@ -55,6 +49,11 @@ def collect_cases():
 
         all_cases.append(Case(name, data, schema, meta_filepath, **meta))
     return all_cases
+
+
+def validate_case_dirpath(case_dirpath):
+    if not re.match(r'^[a-z_]{3,40}$', case_dirpath.name):
+        raise ValueError(f"Invalid case directory name {case_dirpath.name}")
 
 
 def validate_meta(meta, meta_filepath, name):

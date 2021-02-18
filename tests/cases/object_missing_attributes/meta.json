@@ -1,6 +1,6 @@
 {
   "result": false,
-  "error": "Object types must define all attribute types with an \"attr\" field",
-  "error_type": "schema",
+  "error": "Data \\(\\{'name': 'Hamlet'\\}\\) is missing attributes \\(\\{'occupation'\\}\\) defined by the schema \\(\\{'name': 'string', 'occupation': 'string'\\}\\)",
+  "error_type": "data",
   "markers": []
 }

@@ -5,7 +5,7 @@ import pytest
 from jsonvl import validate_file
 
 
-EXAMPLES_DIRPATH = Path(__file__).parent / '..' / 'examples'
+EXAMPLES_DIRPATH = Path(__file__).parent.parent / 'examples'
 DATA_FILENAME = 'data.json'
 SCHEMA_FILENAME = 'schema.json'
 

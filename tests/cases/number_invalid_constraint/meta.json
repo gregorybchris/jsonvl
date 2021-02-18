@@ -1,0 +1,6 @@
+{
+  "result": false,
+  "error": "Type number does not support the constraint fake",
+  "error_type": "schema",
+  "markers": []
+}

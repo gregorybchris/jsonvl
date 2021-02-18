@@ -4,7 +4,7 @@ import pytest
 
 from jsonvl.errors import ErrorMessages
 
-from .constants import PyTest
+from ..constants import PyTest
 
 
 REGION_DATA_ERRORS = 'data-errors'
