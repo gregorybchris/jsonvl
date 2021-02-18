@@ -31,7 +31,6 @@ class ErrorMessages:
     MISSING_FORMAT_TYPE_FIELD = "\"type\" field required in format definition at path {path}"
     MISSING_OBJECT_ATTR_FIELD = "Object types must define all attribute types with an \"attr\" field"
     MISSING_TYPE_FIELD = "\"type\" field required in type definition at path {path}"
-    RECURSIVE_SCHEMA_REFERENCE = "Recursive schema references are not allowed, please update {ref}"
     REFERENCE_NOT_FOUND = "Could not find the definition {ref}"
     UNKNOWN_STRING_FORMAT = "Unknown string format {format}, perhaps try a regex format instead"
     UNKNOWN_TYPE = "Unknown type {type}"

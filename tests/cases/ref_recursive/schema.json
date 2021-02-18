@@ -1,0 +1,12 @@
+{
+  "type": "#person",
+  "defs": {
+    "#person": {
+      "type": "object",
+      "attr": {
+        "name": "string",
+        "brother": ["#person", "null"]
+      }
+    }
+  }
+}

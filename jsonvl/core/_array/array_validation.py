@@ -20,7 +20,7 @@ def validate_array(data, schema, defs, path, validator):
         raise JsonValidationError.create(ErrorMessages.NOT_OF_TYPE, data=data, type=TYPE_NAME)
 
     if Reserved.ELEMENT not in schema:
-        raise JsonValidationError.create(ErrorMessages.MISSING_ARRAY_ELEM)
+        raise JsonSchemaError.create(ErrorMessages.MISSING_ARRAY_ELEM)
 
     elem_schema = schema[Reserved.ELEMENT]
     for i, elem in enumerate(data):

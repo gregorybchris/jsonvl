@@ -76,6 +76,10 @@ class Validator:
 
             type = schema[Reserved.TYPE]
 
+            if type in defs:
+                self._validate(data, type, defs, path)
+                return
+
             if type == Primitive.BOOLEAN.value:
                 validate_boolean(data, schema, defs, path)
             elif type == Primitive.NULL.value:
