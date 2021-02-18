@@ -1,3 +1,8 @@
+v0.2.0
+------
+
+* Recursive type definitions/references support
+
 v0.1.2
 ------
 
