@@ -2,5 +2,5 @@
   "result": false,
   "error": "Value 4 is not of expected type number",
   "error_type": "data",
-  "markers": []
+  "markers": ["number"]
 }

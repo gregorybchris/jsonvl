@@ -2,5 +2,5 @@
   "result": false,
   "error": "Type string does not support the constraint fake",
   "error_type": "schema",
-  "markers": []
+  "markers": ["string"]
 }

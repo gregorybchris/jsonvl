@@ -2,5 +2,5 @@
   "result": false,
   "error": "Failed min_size \\(7\\) constraint with value 4",
   "error_type": "data",
-  "markers": []
+  "markers": ["array"]
 }

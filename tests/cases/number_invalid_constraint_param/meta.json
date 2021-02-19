@@ -2,5 +2,5 @@
   "result": false,
   "error": "Constraint eq requires a parameter of the following types: \\['number'\\], received 2",
   "error_type": "schema",
-  "markers": []
+  "markers": ["number"]
 }

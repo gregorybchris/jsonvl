@@ -2,5 +2,5 @@
   "result": false,
   "error": "Constraint in requires a parameter of the following types: \\['array'\\], received spear",
   "error_type": "schema",
-  "markers": []
+  "markers": ["string"]
 }

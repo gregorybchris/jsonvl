@@ -2,5 +2,5 @@
   "result": false,
   "error": "Value Othello is not of expected type array",
   "error_type": "data",
-  "markers": []
+  "markers": ["array"]
 }

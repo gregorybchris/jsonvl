@@ -2,5 +2,5 @@
   "result": false,
   "error": "Array type missing required \"elem\" field",
   "error_type": "schema",
-  "markers": []
+  "markers": ["array"]
 }

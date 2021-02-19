@@ -2,5 +2,5 @@
   "result": false,
   "error": "Unknown string format iambic-pentameter, perhaps try a regex format instead",
   "error_type": "schema",
-  "markers": []
+  "markers": ["string"]
 }

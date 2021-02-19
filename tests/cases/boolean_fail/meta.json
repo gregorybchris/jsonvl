@@ -2,5 +2,5 @@
   "result": false,
   "error": "Value true is not of expected type boolean",
   "error_type": "data",
-  "markers": []
+  "markers": ["boolean"]
 }

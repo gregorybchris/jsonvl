@@ -2,5 +2,5 @@
   "result": false,
   "error": "Data \\(\\{'name': 'Hamlet', 'occupation': 'Prince of Denmark'\\}\\) has extra attributes \\(\\{'occupation'\\}\\) not defined in the schema \\(\\{'name': 'string'\\}\\)",
   "error_type": "data",
-  "markers": []
+  "markers": ["object"]
 }

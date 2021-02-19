@@ -2,5 +2,5 @@
   "result": false,
   "error": "Constraint unique requires a parameter of the following types: \\['boolean', 'string', 'array'\\], received \\{'path': '@all'\\}",
   "error_type": "schema",
-  "markers": []
+  "markers": ["array"]
 }

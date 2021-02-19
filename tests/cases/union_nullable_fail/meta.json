@@ -2,5 +2,5 @@
   "result": false,
   "error": "Could not parse value 1 as union type \\['string', 'null'\\]",
   "error_type": "data",
-  "markers": []
+  "markers": ["union"]
 }

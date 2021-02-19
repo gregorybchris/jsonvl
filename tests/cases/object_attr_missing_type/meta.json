@@ -2,5 +2,5 @@
   "result": false,
   "error": "\"type\" field required in type definition at path json\\[0\\].act",
   "error_type": "schema",
-  "markers": []
+  "markers": ["object"]
 }

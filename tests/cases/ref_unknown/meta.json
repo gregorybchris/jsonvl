@@ -2,5 +2,5 @@
   "result": false,
   "error": "Could not find the definition #name",
   "error_type": "schema",
-  "markers": []
+  "markers": ["ref"]
 }

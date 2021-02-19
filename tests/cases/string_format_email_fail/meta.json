@@ -2,5 +2,5 @@
   "result": false,
   "error": "Value prospero@milan does not match the email format",
   "error_type": "data",
-  "markers": []
+  "markers": ["string"]
 }
