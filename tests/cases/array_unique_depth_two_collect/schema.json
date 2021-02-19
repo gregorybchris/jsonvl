@@ -1,0 +1,20 @@
+{
+  "type": "array",
+  "elem": {
+    "type": "object",
+    "attr": {
+      "xs": {
+        "type": "array",
+        "elem": {
+          "type": "object",
+          "attr": {
+            "value": "number"
+          }
+        }
+      }
+    }
+  },
+  "cons": {
+    "unique": "@all.xs@all.value"
+  }
+}
