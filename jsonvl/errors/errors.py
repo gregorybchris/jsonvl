@@ -33,3 +33,31 @@ class JsonSchemaError(JsonVlError):
         :param kwargs: Keyword arguments to inject into the message format.
         """
         return cls(message_format.format(**kwargs))
+
+
+class JsonVlSystemError(JsonVlError):
+    """JsonVlSystemError type raised when an unexpected internal system error occurs."""
+
+    @classmethod
+    def create(cls, message_format, **kwargs):
+        """
+        Create a new error based on a message format.
+
+        :param message_format: Message format to raise.
+        :param kwargs: Keyword arguments to inject into the message format.
+        """
+        return cls(message_format.format(**kwargs))
+
+
+class CustomConstraintError(JsonVlError):
+    """CustomConstraintError type raised when a custom constaint is not properly defined."""
+
+    @classmethod
+    def create(cls, message_format, **kwargs):
+        """
+        Create a new error based on a message format.
+
+        :param message_format: Message format to raise.
+        :param kwargs: Keyword arguments to inject into the message format.
+        """
+        return cls(message_format.format(**kwargs))

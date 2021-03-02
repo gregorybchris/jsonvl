@@ -1,8 +1,8 @@
-"""Errors messages shown to the user when validating JSON."""
+"""Errors messages shown when validating JSON."""
 
 
 class ErrorMessages:
-    """Errors messages shown to the user when validating JSON."""
+    """Errors messages shown when validating JSON."""
 
     # region data-errors
 
@@ -27,6 +27,7 @@ class ErrorMessages:
     INVALID_CONSTRAINT = "Type {type} does not support the constraint {cons}"
     INVALID_CONSTRAINT_PARAM_TYPE = "Constraint {cons} requires a parameter " \
                                     "of the following types: {param_types}, received {param}"
+    INVALID_REFERENCE_TYPE_CONSTRAINT = "Constraints are not supported on reference types ({type})."
     MISSING_ARRAY_ELEM = "Array type missing required \"elem\" field"
     MISSING_FORMAT_PATTERN_FIELD = "\"pattern\" field required in format definition at path {path}"
     MISSING_FORMAT_TYPE_FIELD = "\"type\" field required in format definition at path {path}"
@@ -36,5 +37,21 @@ class ErrorMessages:
     UNKNOWN_STRING_FORMAT = "Unknown string format {format}, perhaps try a regex format instead"
     UNKNOWN_STRING_FORMATTER = "Unknown string formatter {formatter}"
     UNKNOWN_TYPE = "Unknown type {type}"
+
+    # endregion
+
+    # region system-errors
+
+    UNEXPECTED_COLLECTION_TYPE = "The system expected a collection type, but the {type} type could not be parsed. " \
+                                 "Please submit an issue at https://github.com/gregorybchris/jsonvl/issues."
+    UNEXPECTED_PRIMITIVE_TYPE = "The system expected a primitive type, but the {type} type could not be parsed. " \
+                                "Please submit an issue at https://github.com/gregorybchris/jsonvl/issues."
+
+    # endregion
+
+    # region custom-constraint-errors
+
+    DUPLICATE_CONSTRAINT_NAME = "The constraint {cons} already exists for type {type}. Please use a different name."
+    UNIMPLEMENTED_CONSTRAINT = "The constraint {name} was not properly implemented."
 
     # endregion

@@ -1,8 +1,8 @@
 """Array validation."""
-from jsonvl._utilities.path_utilities import collect
-from jsonvl.constants.builtins import Collection, Primitive
-from jsonvl.constants.reserved import Reserved
-from jsonvl.core._array.array_constraints import ArrayConstraints
+from jsonvl.constants.builtins import Collection
+from jsonvl.constants.reserved import ReservedWords
+from jsonvl.core._array import array_constraints
+from jsonvl.core._array.array_constraint_names import ArrayConstraintNames
 from jsonvl.errors import ErrorMessages, JsonSchemaError, JsonValidationError
 
 
@@ -19,63 +19,27 @@ def validate_array(data, schema, defs, path, validator):
     if not isinstance(data, list):
         raise JsonValidationError.create(ErrorMessages.NOT_OF_TYPE, data=data, type=TYPE_NAME)
 
-    if Reserved.ELEMENT not in schema:
+    if ReservedWords.ELEMENT not in schema:
         raise JsonSchemaError.create(ErrorMessages.MISSING_ARRAY_ELEM)
 
-    elem_schema = schema[Reserved.ELEMENT]
+    elem_schema = schema[ReservedWords.ELEMENT]
     for i, elem in enumerate(data):
         new_path = f'{path}[{i}]'
         validator._validate(elem, elem_schema, defs, new_path)
 
-    if Reserved.CONSTRAINTS in schema:
-        type_constraints = schema[Reserved.CONSTRAINTS]
-        for cons_name, cons_param in type_constraints.items():
-            if cons_name == ArrayConstraints.MAX_SIZE.value:
-                _constrain_max_size(cons_name, data, cons_param, path)
-            elif cons_name == ArrayConstraints.MIN_SIZE.value:
-                _constrain_min_size(cons_name, data, cons_param, path)
-            elif cons_name == ArrayConstraints.UNIQUE.value:
-                _constrain_unique(cons_name, data, cons_param, path)
-            else:
-                raise JsonSchemaError.create(ErrorMessages.INVALID_CONSTRAINT, type=TYPE_NAME, cons=cons_name)
+    if ReservedWords.CONSTRAINTS in schema:
+        validator._validate_constraints(data, TYPE_NAME, schema[ReservedWords.CONSTRAINTS], path)
 
 
-def _constrain_unique(cons_name, data, cons_param, path):
-    items = []
-    if isinstance(cons_param, bool):
-        items = data
-    elif isinstance(cons_param, str):
-        items = collect(data, cons_param)
-    elif isinstance(cons_param, list):
-        for cons_path in cons_param:
-            _constrain_unique(cons_name, data, cons_path, path)
-    else:
-        valid_types = [Primitive.BOOLEAN.value, Primitive.STRING.value, Collection.ARRAY.value]
-        raise JsonSchemaError.create(ErrorMessages.INVALID_CONSTRAINT_PARAM_TYPE,
-                                     cons=cons_name, param_types=valid_types, param=cons_param)
-    for x_i, x in enumerate(items):
-        for y_i, y in enumerate(items):
-            if x_i != y_i and x == y:
-                raise JsonValidationError.create(ErrorMessages.FAILED_UNIQUE, item=x)
+def register_array_constraints(validator):
+    """
+    Register default array constraints.
 
-
-def _constrain_max_size(cons_name, data, cons_param, path):
-    if not isinstance(cons_param, int):
-        raise JsonSchemaError.create(ErrorMessages.INVALID_CONSTRAINT_PARAM_TYPE,
-                                     param=cons_param, cons=cons_name, param_types=['integer'])
-
-    array_size = len(data)
-    if array_size > cons_param:
-        raise JsonValidationError.create(ErrorMessages.FAILED_CONSTRAINT,
-                                         cons=cons_name, param=cons_param, data=array_size)
-
-
-def _constrain_min_size(cons_name, data, cons_param, path):
-    if not isinstance(cons_param, int):
-        raise JsonSchemaError.create(ErrorMessages.INVALID_CONSTRAINT_PARAM_TYPE,
-                                     cons=cons_name, param=cons_param, param_types=['integer'])
-
-    array_size = len(data)
-    if array_size < cons_param:
-        raise JsonValidationError.create(ErrorMessages.FAILED_CONSTRAINT,
-                                         cons=cons_name, param=cons_param, data=array_size)
+    :param validator: jsonvl.Validator instance on which to register the constraints.
+    """
+    validator.register_constraint(array_constraints.MaxSizeConstraint(),
+                                  TYPE_NAME, ArrayConstraintNames.MAX_SIZE.value)
+    validator.register_constraint(array_constraints.MinSizeConstraint(),
+                                  TYPE_NAME, ArrayConstraintNames.MIN_SIZE.value)
+    validator.register_constraint(array_constraints.UniqueConstraint(),
+                                  TYPE_NAME, ArrayConstraintNames.UNIQUE.value)

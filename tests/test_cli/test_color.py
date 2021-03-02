@@ -5,10 +5,6 @@ import pytest
 from jsonvl._cli.color import Color, print_color
 
 
-REGION_DATA_ERRORS = 'data-errors'
-REGION_SCHEMA_ERRORS = 'schema-errors'
-
-
 class TestErrorMessages:
     @pytest.fixture(params=[
         Color.BLUE,

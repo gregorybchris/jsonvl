@@ -1,6 +1,6 @@
 """Object validation."""
 from jsonvl.constants.builtins import Collection
-from jsonvl.constants.reserved import Reserved
+from jsonvl.constants.reserved import ReservedWords
 from jsonvl.errors import ErrorMessages, JsonSchemaError, JsonValidationError
 
 
@@ -17,10 +17,10 @@ def validate_object(data, schema, defs, path, validator):
     if not isinstance(data, dict):
         raise JsonValidationError.create(ErrorMessages.NOT_OF_TYPE, data=data, type=TYPE_NAME)
 
-    if Reserved.ATTRIBUTES not in schema:
+    if ReservedWords.ATTRIBUTES not in schema:
         raise JsonSchemaError.create(ErrorMessages.MISSING_OBJECT_ATTR_FIELD)
 
-    attr_schema = schema[Reserved.ATTRIBUTES]
+    attr_schema = schema[ReservedWords.ATTRIBUTES]
 
     missing_attr_data = attr_schema.keys() - data.keys()
     if len(missing_attr_data) != 0:
@@ -35,3 +35,15 @@ def validate_object(data, schema, defs, path, validator):
     for attr, attr_type in attr_schema.items():
         new_path = f'{path}.{attr}'
         validator._validate(data[attr], attr_type, defs, new_path)
+
+    if ReservedWords.CONSTRAINTS in schema:
+        validator._validate_constraints(data, TYPE_NAME, schema[ReservedWords.CONSTRAINTS], path)
+
+
+def register_object_constraints(validator):
+    """
+    Register default object constraints.
+
+    :param validator: jsonvl.Validator instance on which to register the constraints.
+    """
+    pass

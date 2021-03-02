@@ -9,12 +9,16 @@ from ..constants import PyTest
 
 REGION_DATA_ERRORS = 'data-errors'
 REGION_SCHEMA_ERRORS = 'schema-errors'
+REGION_SYSTEM_ERRORS = 'system-errors'
+REGION_CUSTOM_CONSTRAINT_ERRORS = 'custom-constraint-errors'
 
 
 class TestErrorMessages:
     @pytest.fixture(params=[
         REGION_DATA_ERRORS,
         REGION_SCHEMA_ERRORS,
+        REGION_SYSTEM_ERRORS,
+        REGION_CUSTOM_CONSTRAINT_ERRORS,
     ], scope=PyTest.SESSION)
     def region_name(self, request):
         return request.param

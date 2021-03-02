@@ -1,7 +1,7 @@
 """Reserved words for jsonvl schemas."""
 
 
-class Reserved:
+class ReservedWords:
     """Reserved words related to type definitions and constraints."""
 
     ALL = 'all'

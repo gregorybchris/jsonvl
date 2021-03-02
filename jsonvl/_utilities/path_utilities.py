@@ -2,7 +2,7 @@
 import itertools
 import re
 
-from jsonvl.constants.reserved import Reserved
+from jsonvl.constants.reserved import ReservedWords
 from jsonvl.errors import ErrorMessages, JsonSchemaError
 
 
@@ -25,7 +25,7 @@ def _collect(data, path_tokens):
 
     token = path_tokens[0]
     if isinstance(data, list):
-        if token != Reserved.ALL:
+        if token != ReservedWords.ALL:
             raise JsonSchemaError.create(ErrorMessages.FAILED_PATH_PARSE_ARRAY)
 
         lists_collected = [_collect(value, path_tokens[1:]) for value in data]

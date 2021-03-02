@@ -1,18 +1,15 @@
 """String validation."""
-import re
-
-from jsonvl.constants.builtins import Collection, Primitive
-from jsonvl.constants.reserved import Reserved
-from jsonvl.core._string.string_constraints import StringConstraints
-from jsonvl.core._string.string_formatting import (
-    StringFormatPatterns, StringFormats, StringFormatters, StringFormatting)
-from jsonvl.errors import ErrorMessages, JsonSchemaError, JsonValidationError
+from jsonvl.constants.builtins import Primitive
+from jsonvl.constants.reserved import ReservedWords
+from jsonvl.core._string import string_constraints
+from jsonvl.core._string.string_constraint_names import StringConstraintNames
+from jsonvl.errors import ErrorMessages, JsonValidationError
 
 
 TYPE_NAME = Primitive.STRING.value
 
 
-def validate_string(data, schema, defs, path):
+def validate_string(data, schema, defs, path, validator):
     """
     Validate a JSON string based on a schema.
 
@@ -25,65 +22,19 @@ def validate_string(data, schema, defs, path):
     if isinstance(schema, str):
         return
 
-    if Reserved.CONSTRAINTS in schema:
-        type_constraints = schema[Reserved.CONSTRAINTS]
-        for cons_name, cons_value in type_constraints.items():
-            if cons_name == StringConstraints.IN.value:
-                _constrain_in(cons_name, data, cons_value, path)
-            elif cons_name == StringConstraints.EQ.value:
-                _constrain_eq(cons_name, data, cons_value, path)
-            elif cons_name == StringConstraints.FORMAT.value:
-                _constrain_format(cons_name, data, cons_value, path)
-            else:
-                raise JsonSchemaError.create(ErrorMessages.INVALID_CONSTRAINT,
-                                             type=TYPE_NAME, cons=cons_name)
+    if ReservedWords.CONSTRAINTS in schema:
+        validator._validate_constraints(data, TYPE_NAME, schema[ReservedWords.CONSTRAINTS], path)
 
 
-def _constrain_in(cons_name, data, cons_param, path):
-    if not isinstance(cons_param, list):
-        raise JsonSchemaError.create(ErrorMessages.INVALID_CONSTRAINT_PARAM_TYPE,
-                                     cons=cons_name, param_types=[Collection.ARRAY.value], param=cons_param)
+def register_string_constraints(validator):
+    """
+    Register default string constraints.
 
-    if data not in cons_param:
-        raise JsonValidationError.create(ErrorMessages.FAILED_CONSTRAINT,
-                                         cons=cons_name, param=cons_param, data=data)
-
-
-def _constrain_eq(cons_name, data, cons_param, path):
-    if not isinstance(cons_param, str):
-        raise JsonSchemaError.create(ErrorMessages.INVALID_CONSTRAINT_PARAM_TYPE,
-                                     cons=cons_name, param_types=[Primitive.STRING.value], param=cons_param)
-
-    if data != cons_param:
-        raise JsonValidationError.create(ErrorMessages.FAILED_CONSTRAINT,
-                                         cons=cons_name, param=cons_param, data=data)
-
-
-def _constrain_format(cons_name, data, cons_param, path):
-    if isinstance(cons_param, str):
-        if cons_param == StringFormats.EMAIL.value:
-            pattern = StringFormatPatterns.EMAIL
-        elif cons_param == StringFormats.PHONE.value:
-            pattern = StringFormatPatterns.PHONE
-        else:
-            raise JsonSchemaError.create(ErrorMessages.UNKNOWN_STRING_FORMAT, format=cons_param)
-
-        if not re.match(pattern, data):
-            raise JsonValidationError.create(ErrorMessages.INCORRECT_FORMAT, data=data, format=cons_param)
-    elif isinstance(cons_param, dict):
-        if StringFormatting.TYPE.value not in cons_param:
-            raise JsonSchemaError.create(ErrorMessages.MISSING_FORMAT_TYPE_FIELD, path=path)
-
-        formatter = cons_param[StringFormatting.TYPE.value]
-        if formatter == StringFormatters.REGEX.value:
-            if StringFormatting.PATTERN.value not in cons_param:
-                raise JsonSchemaError.create(ErrorMessages.MISSING_FORMAT_PATTERN_FIELD, path=path)
-            pattern = cons_param[StringFormatting.PATTERN.value]
-            if not re.match(pattern, data):
-                raise JsonValidationError.create(ErrorMessages.INCORRECT_FORMAT, data=data, format=pattern)
-        else:
-            raise JsonSchemaError.create(ErrorMessages.UNKNOWN_STRING_FORMATTER, formatter=formatter)
-    else:
-        valid_types = [Primitive.STRING.value, Collection.OBJECT.value]
-        raise JsonSchemaError.create(ErrorMessages.INVALID_CONSTRAINT_PARAM_TYPE,
-                                     cons=cons_name, param_types=valid_types, param=cons_param)
+    :param validator: jsonvl.Validator instance on which to register the constraints.
+    """
+    validator.register_constraint(string_constraints.InConstraint(),
+                                  TYPE_NAME, StringConstraintNames.IN.value)
+    validator.register_constraint(string_constraints.EqConstraint(),
+                                  TYPE_NAME, StringConstraintNames.EQ.value)
+    validator.register_constraint(string_constraints.FormatConstraint(),
+                                  TYPE_NAME, StringConstraintNames.FORMAT.value)
