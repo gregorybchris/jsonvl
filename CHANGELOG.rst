@@ -1,3 +1,8 @@
+v0.3.0
+
+* Added support for custom constraints on builtin JSON types
+* Changed reserved words enum name from Reserved to ReservedWords
+
 v0.2.0
 ------
 
