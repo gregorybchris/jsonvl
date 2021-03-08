@@ -28,26 +28,27 @@ class Case:
 
 def collect_cases():
     all_cases = []
-    for case_dirpath in CASES_DIRPATH.iterdir():
-        validate_case_dirpath(case_dirpath)
+    for case_group_dirpath in CASES_DIRPATH.iterdir():
+        for case_dirpath in case_group_dirpath.iterdir():
+            validate_case_dirpath(case_dirpath)
 
-        name = case_dirpath.name
+            name = case_dirpath.name
 
-        data_filepath = case_dirpath / Cases.DATA_FILENAME
-        with open(data_filepath, 'r') as f:
-            data = json.load(f)
+            data_filepath = case_dirpath / Cases.DATA_FILENAME
+            with open(data_filepath, 'r') as f:
+                data = json.load(f)
 
-        schema_filepath = case_dirpath / Cases.SCHEMA_FILENAME
-        with open(schema_filepath, 'r') as f:
-            schema = json.load(f)
+            schema_filepath = case_dirpath / Cases.SCHEMA_FILENAME
+            with open(schema_filepath, 'r') as f:
+                schema = json.load(f)
 
-        meta_filepath = case_dirpath / Cases.META_FILENAME
-        with open(meta_filepath, 'r') as f:
-            meta = json.load(f)
+            meta_filepath = case_dirpath / Cases.META_FILENAME
+            with open(meta_filepath, 'r') as f:
+                meta = json.load(f)
 
-        validate_meta(meta, meta_filepath, name)
+            validate_meta(meta, meta_filepath, name)
 
-        all_cases.append(Case(name, data, schema, meta_filepath, **meta))
+            all_cases.append(Case(name, data, schema, meta_filepath, **meta))
     return all_cases
 
 

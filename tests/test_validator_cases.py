@@ -27,7 +27,19 @@ class TestValidatorCases:
     def test_validate_file(self):
         cases_dir = Path(__file__).parent / 'cases'
 
+        case_group = 'number'
         case_name = 'number'
-        data_filepath = cases_dir / case_name / 'data.json'
-        schema_filepath = cases_dir / case_name / 'schema.json'
+        data_filepath = cases_dir / case_group / case_name / 'data.json'
+        schema_filepath = cases_dir / case_group / case_name / 'schema.json'
         validate_file(data_filepath, schema_filepath)
+
+    def test_validate_file_fail(self):
+        cases_dir = Path(__file__).parent / 'cases'
+
+        case_group = 'number'
+        case_name = 'number_fail'
+        data_filepath = cases_dir / case_group / case_name / 'data.json'
+        schema_filepath = cases_dir / case_group / case_name / 'schema.json'
+        message = r'^Value 4 is not of expected type number at path root$'
+        with pytest.raises(JsonValidationError, match=message):
+            validate_file(data_filepath, schema_filepath)
