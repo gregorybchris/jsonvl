@@ -50,18 +50,26 @@ class UniqueConstraint(Constraint):
 
     def constrain(self, constraint_name, data, constraint_param, path):
         """Constraining method."""
-        items = []
         if isinstance(constraint_param, bool):
+            if not constraint_param:
+                return
             items = data
+            full_path = f'{path}@all'
+            self._constrain_items(items, full_path)
         elif isinstance(constraint_param, str):
             items = collect(data, constraint_param)
+            full_path = f'{path}{constraint_param}'
+            self._constrain_items(items, full_path)
         elif isinstance(constraint_param, list):
             for constraint_path in constraint_param:
                 self.constrain(constraint_name, data, constraint_path, path)
+            return
         else:
             valid_types = [Primitive.BOOLEAN.value, Primitive.STRING.value, Collection.ARRAY.value]
             raise JsonSchemaError.create(ErrorMessages.INVALID_CONSTRAINT_PARAM_TYPE,
                                          cons=constraint_name, param_types=valid_types, param=constraint_param)
+
+    def _constrain_items(self, items, path):
         for x_i, x in enumerate(items):
             for y_i, y in enumerate(items):
                 if x_i != y_i and x == y:

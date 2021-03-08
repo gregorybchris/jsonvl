@@ -1,6 +1,6 @@
 {
   "result": false,
-  "error": "Unique constraint failed on duplicate item Iago at path root",
+  "error": "Unique constraint failed on duplicate item Iago at path root@all",
   "error_type": "data",
   "markers": ["array"]
 }
