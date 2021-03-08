@@ -121,6 +121,9 @@ class Validator:
 
         type = schema[ReservedWords.TYPE]
 
+        if not isinstance(type, str):
+            raise JsonSchemaError.create(ErrorMessages.INVALID_DICT_SCHEMA_TYPE, path=path)
+
         if type in defs:
             self._validate(data, type, defs, path)
 

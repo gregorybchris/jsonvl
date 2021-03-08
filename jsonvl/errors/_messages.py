@@ -27,6 +27,8 @@ class ErrorMessages:
     INVALID_CONSTRAINT = "Type {type} does not support the constraint {cons}"
     INVALID_CONSTRAINT_PARAM_TYPE = "Constraint {cons} requires a parameter " \
                                     "of the following types: {param_types}, received {param}"
+    INVALID_DICT_SCHEMA_TYPE = "Schemas defined as objects with a \"type\" field must use simple built-in " \
+                               "JSON types, invalid schema for path {path}"
     INVALID_REFERENCE_TYPE_CONSTRAINT = "Constraints are not supported on reference types ({type})."
     MISSING_ARRAY_ELEM = "Array type missing required \"elem\" field at path {path}"
     MISSING_FORMAT_PATTERN_FIELD = "\"pattern\" field required in format definition at path {path}"
