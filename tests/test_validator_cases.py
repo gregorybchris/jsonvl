@@ -1,9 +1,9 @@
 from pathlib import Path
 
-import pytest
-
 from jsonvl import validate, validate_file
 from jsonvl.errors import JsonSchemaError, JsonValidationError
+
+import pytest
 
 from .constants import Cases
 

@@ -1,8 +1,8 @@
 from pathlib import Path
 
-import pytest
-
 from jsonvl import validate_file
+
+import pytest
 
 
 EXAMPLES_DIRPATH = Path(__file__).parent.parent / 'examples'

@@ -31,6 +31,9 @@ jobs:
     - name: pydocstyle
       run: |
         pydocstyle jsonvl
+    - name: flake8
+      run: |
+        flake8 --config setup.cfg
     - name: pytest
       run: |
         pytest --cov=jsonvl --cov-report=html --cov-branch

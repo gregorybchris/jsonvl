@@ -4,3 +4,4 @@ pytest-forked
 pytest-xdist
 pycodestyle
 pydocstyle
+flake8

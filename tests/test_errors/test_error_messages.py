@@ -1,8 +1,8 @@
 import inspect
 
-import pytest
-
 from jsonvl.errors import ErrorMessages
+
+import pytest
 
 from ..constants import PyTest
 

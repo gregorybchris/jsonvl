@@ -1,7 +1,7 @@
-import pytest
-
 from jsonvl import Constraint, Validator
 from jsonvl.errors import CustomConstraintError
+
+import pytest
 
 
 class MonotoneIncreaseConstraint(Constraint):

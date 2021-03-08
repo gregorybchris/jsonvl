@@ -1,7 +1,7 @@
-import pytest
-
 from jsonvl import Validator
 from jsonvl.errors import JsonVlSystemError
+
+import pytest
 
 
 class TestValidator:

@@ -8,31 +8,37 @@ class TestChangelog:
     def test_changelog(self):
         with open(CHANGELOG_FILEPATH, 'r') as f:
             lines = f.readlines()
-            assert lines[-1][-1] == '\n'
+            self.check_version_line(lines, 0)
 
-            n_lines = len(lines)
-            for i in range(n_lines):
-                line = lines[i]
-                if line.startswith('v'):
-                    if i != 0:
-                        self.check_blank_line(lines[i - 1])
-                    self.check_version_line(line)
-                    self.check_sep_line(lines[i + 1], len(line))
-                elif line.startswith('*'):
-                    pass
-                elif line.startswith('----'):
-                    pass
-                elif line == '\n':
-                    pass
-                else:
-                    raise ValueError(f"Invalid CHANGELOG on line {i}: {line}")
+    def check_version_line(self, lines, i):
+        assert re.match(r'^v[0-9]+\.[0-9]+\.[0-9]+\n$', lines[i]), f"Version is invalid: {lines[i]}"
+        self.check_sep_line(lines, i + 1)
 
-    def check_blank_line(self, line):
-        assert line == '\n', "Expected blank line"
+    def check_sep_line(self, lines, i):
+        assert re.match(r'^[-]+$', lines[i]), "Separator expected after version line"
+        length = len(lines[i - 1])
+        assert len(lines[i]) == length, f"Separator expected to have {length} dashes based on version {lines[i - 1]}"
+        self.check_blank_line(lines, i + 1)
 
-    def check_sep_line(self, line, length):
-        assert re.match(r'^[-]+$', line), "Expected separator line"
-        assert len(line) == length, f"Expected separator line to have {length} dashes"
+    def check_blank_line(self, lines, i):
+        assert lines[i] == '\n', "Expected a blank line"
 
-    def check_version_line(self, line):
-        assert re.match(r'^v[0-9]+\.[0-9]+\.[0-9]+\n$', line), "Expected valid version line"
+        if lines[i + 1].startswith('v'):
+            self.check_version_line(lines, i + 1)
+        elif lines[i + 1].startswith('*'):
+            assert lines[i - 1].startswith('-'), "Expected a separator before a blank space before a change."
+            self.check_change_line(lines, i + 1)
+        else:
+            raise ValueError(f"Expected a change or a version after a blank line at {i}")
+
+    def check_change_line(self, lines, i):
+        assert re.match(r'^\*\s', lines[i]), "Invalid change line format"
+
+        if i == len(lines) - 1:
+            return
+        elif lines[i + 1].startswith('*'):
+            self.check_change_line(lines, i + 1)
+        elif lines[i + 1] == '\n':
+            self.check_blank_line(lines, i + 1)
+        else:
+            raise ValueError(f"Invalid CHANGELOG on line {i + 1}: {lines[i + 1]}")

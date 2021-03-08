@@ -1,8 +1,8 @@
 import builtins
 
-import pytest
-
 from jsonvl._cli.color import Color, print_color
+
+import pytest
 
 
 class TestErrorMessages:
