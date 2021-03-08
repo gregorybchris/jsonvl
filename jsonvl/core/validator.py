@@ -1,4 +1,5 @@
 """JSON validator."""
+import json
 from copy import deepcopy
 
 from jsonvl.constants.builtins import Collection, Primitive
@@ -38,6 +39,19 @@ class Validator:
         :param schema: JSON schema as a Python object.
         """
         self._validate(data, schema, defs={}, path='root')
+
+    def validate_file(self, data_filepath, schema_filepath):
+        """
+        Validate a JSON file based on a schema file.
+
+        :param data_filepath: Filepath to JSON data.
+        :param schema_filepath: Filepath to JSON schema.
+        """
+        with open(data_filepath, 'r') as f:
+            data = json.load(f)
+        with open(schema_filepath, 'r') as f:
+            schema = json.load(f)
+        self.validate(data, schema)
 
     def register_constraint(self, constraint, type, name):
         """

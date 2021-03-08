@@ -1,6 +1,4 @@
 """Convenience functions for default validation."""
-import json
-
 from jsonvl.core.validator import Validator
 
 
@@ -14,15 +12,11 @@ def validate(data, schema):
     Validator().validate(data, schema)
 
 
-def validate_file(data_filepath: str, schema_filepath: str):
+def validate_file(data_filepath, schema_filepath):
     """
     Validate a JSON file based on a schema file.
 
     :param data_filepath: Filepath to JSON data.
     :param schema_filepath: Filepath to JSON schema.
     """
-    with open(data_filepath, 'r') as f:
-        data = json.load(f)
-    with open(schema_filepath, 'r') as f:
-        schema = json.load(f)
-    Validator().validate(data, schema)
+    Validator().validate_file(data_filepath, schema_filepath)
