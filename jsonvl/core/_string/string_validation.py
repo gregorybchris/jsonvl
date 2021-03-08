@@ -32,6 +32,10 @@ def register_string_constraints(validator):
 
     :param validator: jsonvl.Validator instance on which to register the constraints.
     """
+    validator.register_constraint(string_constraints.MinLengthConstraint(),
+                                  TYPE_NAME, StringConstraintNames.MIN_LENGTH.value)
+    validator.register_constraint(string_constraints.MaxLengthConstraint(),
+                                  TYPE_NAME, StringConstraintNames.MAX_LENGTH.value)
     validator.register_constraint(string_constraints.InConstraint(),
                                   TYPE_NAME, StringConstraintNames.IN.value)
     validator.register_constraint(string_constraints.EqConstraint(),

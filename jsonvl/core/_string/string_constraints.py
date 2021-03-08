@@ -8,6 +8,36 @@ from jsonvl.core.constraint import Constraint
 from jsonvl.errors import ErrorMessages, JsonSchemaError, JsonValidationError
 
 
+class MinLengthConstraint(Constraint):
+    """Minimum string length constraint."""
+
+    def constrain(self, constraint_name, data, constraint_param, path):
+        """Constraining method."""
+        if not isinstance(constraint_param, int):
+            raise JsonSchemaError.create(ErrorMessages.INVALID_CONSTRAINT_PARAM_TYPE,
+                                         param=constraint_param, cons=constraint_name, param_types=['integer'])
+
+        string_length = len(data)
+        if string_length < constraint_param:
+            raise JsonValidationError.create(ErrorMessages.FAILED_CONSTRAINT,
+                                             cons=constraint_name, param=constraint_param, data=string_length)
+
+
+class MaxLengthConstraint(Constraint):
+    """Maximum string length constraint."""
+
+    def constrain(self, constraint_name, data, constraint_param, path):
+        """Constraining method."""
+        if not isinstance(constraint_param, int):
+            raise JsonSchemaError.create(ErrorMessages.INVALID_CONSTRAINT_PARAM_TYPE,
+                                         param=constraint_param, cons=constraint_name, param_types=['integer'])
+
+        string_length = len(data)
+        if string_length > constraint_param:
+            raise JsonValidationError.create(ErrorMessages.FAILED_CONSTRAINT,
+                                             cons=constraint_name, param=constraint_param, data=string_length)
+
+
 class InConstraint(Constraint):
     """In constraint."""
 

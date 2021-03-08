@@ -1,0 +1,6 @@
+{
+  "type": "string",
+  "cons": {
+    "max_length": 7
+  }
+}
