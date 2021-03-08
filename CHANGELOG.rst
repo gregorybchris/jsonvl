@@ -1,3 +1,10 @@
+v0.4.0
+------
+
+* Added min/max length constraints for strings
+* Improved error messages with path to invalid data
+* Added ability to validate with a filepath from a Validator object
+
 v0.3.0
 ------
 
