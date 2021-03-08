@@ -1,6 +1,6 @@
 {
   "result": false,
-  "error": "Unique constraint failed on duplicate item son",
+  "error": "Unique constraint failed on duplicate item son at path root",
   "error_type": "data",
   "markers": ["array"]
 }

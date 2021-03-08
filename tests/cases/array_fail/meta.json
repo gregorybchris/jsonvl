@@ -1,6 +1,6 @@
 {
   "result": false,
-  "error": "Value Othello is not of expected type array",
+  "error": "Value Othello is not of expected type array at path root",
   "error_type": "data",
   "markers": ["array"]
 }

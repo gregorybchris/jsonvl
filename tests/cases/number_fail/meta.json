@@ -1,6 +1,6 @@
 {
   "result": false,
-  "error": "Value 4 is not of expected type number",
+  "error": "Value 4 is not of expected type number at path root",
   "error_type": "data",
   "markers": ["number"]
 }

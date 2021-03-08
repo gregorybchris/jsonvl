@@ -37,7 +37,7 @@ class Validator:
         :param data: JSON data as a Python object.
         :param schema: JSON schema as a Python object.
         """
-        self._validate(data, schema, defs={}, path='json')
+        self._validate(data, schema, defs={}, path='root')
 
     def register_constraint(self, constraint, type, name):
         """

@@ -17,10 +17,10 @@ def validate_array(data, schema, defs, path, validator):
     :param schema: JSON schema as a Python object.
     """
     if not isinstance(data, list):
-        raise JsonValidationError.create(ErrorMessages.NOT_OF_TYPE, data=data, type=TYPE_NAME)
+        raise JsonValidationError.create(ErrorMessages.NOT_OF_TYPE, data=data, type=TYPE_NAME, path=path)
 
     if ReservedWords.ELEMENT not in schema:
-        raise JsonSchemaError.create(ErrorMessages.MISSING_ARRAY_ELEM)
+        raise JsonSchemaError.create(ErrorMessages.MISSING_ARRAY_ELEM, path=path)
 
     elem_schema = schema[ReservedWords.ELEMENT]
     for i, elem in enumerate(data):

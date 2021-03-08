@@ -1,6 +1,6 @@
 {
   "result": false,
-  "error": "Value 1 is not of expected type null",
+  "error": "Value 1 is not of expected type null at path root",
   "error_type": "data",
   "markers": ["null"]
 }

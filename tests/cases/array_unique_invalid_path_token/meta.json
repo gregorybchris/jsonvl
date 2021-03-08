@@ -1,6 +1,6 @@
 {
   "result": false,
-  "error": "Failed to parse path at token name",
+  "error": "Failed to parse path @all.name at token name",
   "error_type": "schema",
   "markers": ["array"]
 }

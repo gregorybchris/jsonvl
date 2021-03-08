@@ -1,6 +1,6 @@
 {
   "result": false,
-  "error": "Array type missing required \"elem\" field",
+  "error": "Array type missing required \"elem\" field at path root",
   "error_type": "schema",
   "markers": ["array"]
 }

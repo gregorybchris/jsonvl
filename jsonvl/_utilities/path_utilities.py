@@ -16,10 +16,10 @@ def collect(data, path):
     """
     path_tokens = re.split(r'(?<!\\)\.|(?<!\\)@', path)
     path_tokens = [token.replace('\\', '') for token in path_tokens if token != '']
-    return _collect(data, path_tokens)
+    return _collect(data, path_tokens, path)
 
 
-def _collect(data, path_tokens):
+def _collect(data, path_tokens, path):
     if len(path_tokens) == 0:
         return [data]
 
@@ -28,12 +28,12 @@ def _collect(data, path_tokens):
         if token != ReservedWords.ALL:
             raise JsonSchemaError.create(ErrorMessages.FAILED_PATH_PARSE_ARRAY)
 
-        lists_collected = [_collect(value, path_tokens[1:]) for value in data]
+        lists_collected = [_collect(value, path_tokens[1:], path) for value in data]
         return list(itertools.chain.from_iterable(lists_collected))
     elif isinstance(data, dict):
         if token not in data:
-            raise JsonSchemaError.create(ErrorMessages.FAILED_PATH_PARSE_TOKEN, token=token)
+            raise JsonSchemaError.create(ErrorMessages.FAILED_PATH_PARSE_TOKEN, token=token, path=path)
 
-        return _collect(data[token], path_tokens[1:])
+        return _collect(data[token], path_tokens[1:], path)
     else:
-        raise JsonSchemaError.create(ErrorMessages.FAILED_PATH_PARSE_TOKEN, token=token)
+        raise JsonSchemaError.create(ErrorMessages.FAILED_PATH_PARSE_TOKEN, token=token, path=path)

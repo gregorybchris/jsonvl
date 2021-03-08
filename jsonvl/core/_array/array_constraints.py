@@ -55,4 +55,4 @@ class UniqueConstraint(Constraint):
         for x_i, x in enumerate(items):
             for y_i, y in enumerate(items):
                 if x_i != y_i and x == y:
-                    raise JsonValidationError.create(ErrorMessages.FAILED_UNIQUE, item=x)
+                    raise JsonValidationError.create(ErrorMessages.FAILED_UNIQUE, item=x, path=path)

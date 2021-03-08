@@ -15,7 +15,7 @@ def validate_object(data, schema, defs, path, validator):
     :param schema: JSON schema as a Python object.
     """
     if not isinstance(data, dict):
-        raise JsonValidationError.create(ErrorMessages.NOT_OF_TYPE, data=data, type=TYPE_NAME)
+        raise JsonValidationError.create(ErrorMessages.NOT_OF_TYPE, data=data, type=TYPE_NAME, path=path)
 
     if ReservedWords.ATTRIBUTES not in schema:
         raise JsonSchemaError.create(ErrorMessages.MISSING_OBJECT_ATTR_FIELD)

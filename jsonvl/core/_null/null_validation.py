@@ -15,7 +15,7 @@ def validate_null(data, schema, defs, path, validator):
     :param schema: JSON schema as a Python object.
     """
     if data is not None:
-        raise JsonValidationError.create(ErrorMessages.NOT_OF_TYPE, data=data, type=TYPE_NAME)
+        raise JsonValidationError.create(ErrorMessages.NOT_OF_TYPE, data=data, type=TYPE_NAME, path=path)
 
     if ReservedWords.CONSTRAINTS in schema:
         validator._validate_constraints(data, TYPE_NAME, schema[ReservedWords.CONSTRAINTS], path)

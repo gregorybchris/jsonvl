@@ -17,7 +17,7 @@ def validate_string(data, schema, defs, path, validator):
     :param schema: JSON schema as a Python object.
     """
     if not isinstance(data, str):
-        raise JsonValidationError.create(ErrorMessages.NOT_OF_TYPE, data=data, type=TYPE_NAME)
+        raise JsonValidationError.create(ErrorMessages.NOT_OF_TYPE, data=data, type=TYPE_NAME, path=path)
 
     if isinstance(schema, str):
         return

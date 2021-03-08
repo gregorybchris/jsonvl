@@ -1,6 +1,6 @@
 {
   "result": false,
-  "error": "Value None is not of expected type object",
+  "error": "Value None is not of expected type object at path root.brother.brother.brother",
   "error_type": "data",
   "markers": ["ref"]
 }
