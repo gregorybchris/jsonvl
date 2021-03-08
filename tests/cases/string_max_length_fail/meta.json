@@ -1,6 +1,6 @@
 {
   "result": false,
-  "error": "Failed max_length \\(7\\) constraint with value 11",
+  "error": "Failed max_length \\(7\\) constraint with value 11 at path root",
   "error_type": "data",
   "markers": ["string"]
 }

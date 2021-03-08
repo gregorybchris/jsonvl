@@ -12,12 +12,17 @@ class MaxSizeConstraint(Constraint):
         """Constraining method."""
         if not isinstance(constraint_param, int):
             raise JsonSchemaError.create(ErrorMessages.INVALID_CONSTRAINT_PARAM_TYPE,
-                                         param=constraint_param, cons=constraint_name, param_types=['integer'])
+                                         param=constraint_param,
+                                         cons=constraint_name,
+                                         param_types=['integer'])
 
         array_size = len(data)
         if array_size > constraint_param:
             raise JsonValidationError.create(ErrorMessages.FAILED_CONSTRAINT,
-                                             cons=constraint_name, param=constraint_param, data=array_size)
+                                             cons=constraint_name,
+                                             param=constraint_param,
+                                             data=array_size,
+                                             path=path)
 
 
 class MinSizeConstraint(Constraint):
@@ -27,12 +32,17 @@ class MinSizeConstraint(Constraint):
         """Constraining method."""
         if not isinstance(constraint_param, int):
             raise JsonSchemaError.create(ErrorMessages.INVALID_CONSTRAINT_PARAM_TYPE,
-                                         cons=constraint_name, param=constraint_param, param_types=['integer'])
+                                         cons=constraint_name,
+                                         param=constraint_param,
+                                         param_types=['integer'])
 
         array_size = len(data)
         if array_size < constraint_param:
             raise JsonValidationError.create(ErrorMessages.FAILED_CONSTRAINT,
-                                             cons=constraint_name, param=constraint_param, data=array_size)
+                                             cons=constraint_name,
+                                             param=constraint_param,
+                                             data=array_size,
+                                             path=path)
 
 
 class UniqueConstraint(Constraint):

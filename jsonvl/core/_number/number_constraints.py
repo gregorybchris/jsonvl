@@ -14,7 +14,8 @@ class LtConstraint(Constraint):
             raise JsonValidationError.create(ErrorMessages.FAILED_CONSTRAINT,
                                              cons=constraint_name,
                                              param=constraint_param,
-                                             data=data)
+                                             data=data,
+                                             path=path)
 
 
 class GtConstraint(Constraint):
@@ -27,7 +28,8 @@ class GtConstraint(Constraint):
             raise JsonValidationError.create(ErrorMessages.FAILED_CONSTRAINT,
                                              cons=constraint_name,
                                              param=constraint_param,
-                                             data=data)
+                                             data=data,
+                                             path=path)
 
 
 class LteConstraint(Constraint):
@@ -40,7 +42,8 @@ class LteConstraint(Constraint):
             raise JsonValidationError.create(ErrorMessages.FAILED_CONSTRAINT,
                                              cons=constraint_name,
                                              param=constraint_param,
-                                             data=data)
+                                             data=data,
+                                             path=path)
 
 
 class GteConstraint(Constraint):
@@ -53,7 +56,8 @@ class GteConstraint(Constraint):
             raise JsonValidationError.create(ErrorMessages.FAILED_CONSTRAINT,
                                              cons=constraint_name,
                                              param=constraint_param,
-                                             data=data)
+                                             data=data,
+                                             path=path)
 
 
 class EqConstraint(Constraint):
@@ -66,7 +70,8 @@ class EqConstraint(Constraint):
             raise JsonValidationError.create(ErrorMessages.FAILED_CONSTRAINT,
                                              cons=constraint_name,
                                              param=constraint_param,
-                                             data=data)
+                                             data=data,
+                                             path=path)
 
 
 def _check_number_type(constraint_name, constraint_param):

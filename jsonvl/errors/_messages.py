@@ -8,7 +8,7 @@ class ErrorMessages:
 
     EXTRA_OBJECT_ATTR = "Data ({data}) has extra attributes ({extra_attr}) " \
                         "not defined in the schema ({schema})"
-    FAILED_CONSTRAINT = "Failed {cons} ({param}) constraint with value {data}"
+    FAILED_CONSTRAINT = "Failed {cons} ({param}) constraint with value {data} at path {path}"
     FAILED_UNION_TYPE_PARSE = "Could not parse value {data} as union type {types}"
     FAILED_UNIQUE = "Unique constraint failed on duplicate item {item} at path {path}"
     INCORRECT_FORMAT = "Value {data} does not match the {format} format"

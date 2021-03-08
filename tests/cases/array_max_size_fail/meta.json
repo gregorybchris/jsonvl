@@ -1,6 +1,6 @@
 {
   "result": false,
-  "error": "Failed max_size \\(3\\) constraint with value 4",
+  "error": "Failed max_size \\(3\\) constraint with value 4 at path root",
   "error_type": "data",
   "markers": ["array"]
 }

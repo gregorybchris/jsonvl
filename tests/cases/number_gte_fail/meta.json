@@ -1,6 +1,6 @@
 {
   "result": false,
-  "error": "Failed gte \\(5\\) constraint with value 4",
+  "error": "Failed gte \\(5\\) constraint with value 4 at path root",
   "error_type": "data",
   "markers": ["number"]
 }

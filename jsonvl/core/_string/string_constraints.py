@@ -15,12 +15,17 @@ class MinLengthConstraint(Constraint):
         """Constraining method."""
         if not isinstance(constraint_param, int):
             raise JsonSchemaError.create(ErrorMessages.INVALID_CONSTRAINT_PARAM_TYPE,
-                                         param=constraint_param, cons=constraint_name, param_types=['integer'])
+                                         param=constraint_param,
+                                         cons=constraint_name,
+                                         param_types=['integer'])
 
         string_length = len(data)
         if string_length < constraint_param:
             raise JsonValidationError.create(ErrorMessages.FAILED_CONSTRAINT,
-                                             cons=constraint_name, param=constraint_param, data=string_length)
+                                             cons=constraint_name,
+                                             param=constraint_param,
+                                             data=string_length,
+                                             path=path)
 
 
 class MaxLengthConstraint(Constraint):
@@ -30,12 +35,17 @@ class MaxLengthConstraint(Constraint):
         """Constraining method."""
         if not isinstance(constraint_param, int):
             raise JsonSchemaError.create(ErrorMessages.INVALID_CONSTRAINT_PARAM_TYPE,
-                                         param=constraint_param, cons=constraint_name, param_types=['integer'])
+                                         param=constraint_param,
+                                         cons=constraint_name,
+                                         param_types=['integer'])
 
         string_length = len(data)
         if string_length > constraint_param:
             raise JsonValidationError.create(ErrorMessages.FAILED_CONSTRAINT,
-                                             cons=constraint_name, param=constraint_param, data=string_length)
+                                             cons=constraint_name,
+                                             param=constraint_param,
+                                             data=string_length,
+                                             path=path)
 
 
 class InConstraint(Constraint):
@@ -53,7 +63,8 @@ class InConstraint(Constraint):
             raise JsonValidationError.create(ErrorMessages.FAILED_CONSTRAINT,
                                              cons=constraint_name,
                                              param=constraint_param,
-                                             data=data)
+                                             data=data,
+                                             path=path)
 
 
 class EqConstraint(Constraint):
@@ -71,7 +82,8 @@ class EqConstraint(Constraint):
             raise JsonValidationError.create(ErrorMessages.FAILED_CONSTRAINT,
                                              cons=constraint_name,
                                              param=constraint_param,
-                                             data=data)
+                                             data=data,
+                                             path=path)
 
 
 class FormatConstraint(Constraint):

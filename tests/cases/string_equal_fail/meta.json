@@ -1,6 +1,6 @@
 {
   "result": false,
-  "error": "Failed eq \\(Titus Andronicus\\) constraint with value Coriolanus",
+  "error": "Failed eq \\(Titus Andronicus\\) constraint with value Coriolanus at path root.name",
   "error_type": "data",
   "markers": ["string"]
 }
