@@ -1,6 +1,7 @@
 """JSON validator type constaint."""
 from abc import ABC
 
+from jsonvl._path.path_utilities import query
 from jsonvl.errors import CustomConstraintError, ErrorMessages
 
 
@@ -17,3 +18,13 @@ class Constraint(ABC):
         """
         class_name = self.__class__.__name__
         raise CustomConstraintError.create(ErrorMessages.UNIMPLEMENTED_CONSTRAINT, name=class_name)
+
+    def query(self, data, path):
+        """
+        Collect all items in the data that match the given path.
+
+        :param data: Data from which to collect items.
+        :param path: Path in data from which to collect items.
+        :return: A list of items from the data matching the path.
+        """
+        return query(data, path)

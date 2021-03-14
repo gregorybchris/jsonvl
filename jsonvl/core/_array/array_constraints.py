@@ -1,5 +1,4 @@
 """Array constraints."""
-from jsonvl._utilities.path_utilities import collect
 from jsonvl.constants.builtins import Collection, Primitive
 from jsonvl.core.constraint import Constraint
 from jsonvl.errors import ErrorMessages, JsonSchemaError, JsonValidationError
@@ -57,7 +56,7 @@ class UniqueConstraint(Constraint):
             full_path = f'{path}@all'
             self._constrain_items(items, full_path)
         elif isinstance(constraint_param, str):
-            items = collect(data, constraint_param)
+            items = self.query(data, constraint_param)
             full_path = f'{path}{constraint_param}'
             self._constrain_items(items, full_path)
         elif isinstance(constraint_param, list):
