@@ -1,3 +1,8 @@
+v0.5.0
+------
+
+* Added support for querying with paths within constraints
+
 v0.4.0
 ------
 
