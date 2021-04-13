@@ -43,7 +43,7 @@ The JsonVL documentation is hosted by [Read the Docs](https://jsonvl.readthedocs
 
 ## Example
 
-Below is an example pair of JSON data and JSON schema. More examples can be found in the [examples](./examples) folder.
+Below is an example pair of JSON data and JSON schema. More examples can be found in the [examples](https://github.com/gregorybchris/jsonvl/tree/main/examples) folder.
 
 ### Data
 
