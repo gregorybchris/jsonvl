@@ -1,6 +1,6 @@
 {
   "result": false,
-  "error": "Failed in \\(\\['The Tempest', 'Much Ado About Nothing', 'Twelfth Night'\\]\\) constraint with value King John at path root\\[6\\].play",
+  "error": "Failed in (['The Tempest', 'Much Ado About Nothing', 'Twelfth Night']) constraint with value King John at path root[6].play",
   "error_type": "data",
   "markers": ["string"]
 }

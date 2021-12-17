@@ -1,6 +1,6 @@
 {
   "result": false,
-  "error": "Schemas defined as objects with a \"type\" field must use simple built-in JSON types, invalid schema for path root\\[0\\]",
+  "error": "Schemas defined as objects with a \"type\" field must use simple built-in JSON types, invalid schema for path root[0]",
   "error_type": "schema",
   "markers": []
 }

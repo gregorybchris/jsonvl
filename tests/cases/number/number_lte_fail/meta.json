@@ -1,6 +1,6 @@
 {
   "result": false,
-  "error": "Failed lte \\(4\\) constraint with value 5 at path root",
+  "error": "Failed lte (4) constraint with value 5 at path root",
   "error_type": "data",
   "markers": ["number"]
 }

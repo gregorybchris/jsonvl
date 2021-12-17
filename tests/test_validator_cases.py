@@ -4,6 +4,7 @@ from jsonvl import validate, validate_file
 from jsonvl.errors import JsonSchemaError, JsonValidationError
 
 import pytest
+import re
 
 from .constants import Cases
 
@@ -13,7 +14,8 @@ class TestValidatorCases:
         if case.result:
             validate(case.data, case.schema)
         else:
-            error_exact_regex = f"^{case.error}$"
+            escaped_error_regex = re.escape(f"{case.error}")
+            error_exact_regex = f"^{escaped_error_regex}$"
             if case.error_type == Cases.DATA_ERROR:
                 with pytest.raises(JsonValidationError, match=error_exact_regex):
                     validate(case.data, case.schema)

@@ -1,6 +1,6 @@
 {
   "result": false,
-  "error": "Failed eq \\(3\\) constraint with value 2 at path root",
+  "error": "Failed eq (3) constraint with value 2 at path root",
   "error_type": "data",
   "markers": ["number"]
 }

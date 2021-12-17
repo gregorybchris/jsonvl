@@ -1,6 +1,6 @@
 {
   "result": false,
-  "error": "\"type\" field required in type definition at path root\\[0\\].act",
+  "error": "\"type\" field required in type definition at path root[0].act",
   "error_type": "schema",
   "markers": ["object"]
 }

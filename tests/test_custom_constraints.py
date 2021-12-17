@@ -2,6 +2,7 @@ from jsonvl import Constraint, Validator
 from jsonvl.errors import CustomConstraintError
 
 import pytest
+import re
 
 
 class MonotoneIncreaseConstraint(Constraint):
@@ -72,6 +73,6 @@ class TestCustomConstraints:
             'cons': {'monotone_inc': True},
             'defs': {'#name': {'type': 'array', 'elem': 'number'}}
         }
-        message = "Constraints are not supported on reference types \\(#name\\)."
-        with pytest.raises(ValueError, match=message):
+        message = "Constraints are not supported on reference types (#name)."
+        with pytest.raises(ValueError, match=re.escape(message)):
             validator.validate(data, schema)
